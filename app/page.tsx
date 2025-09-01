@@ -12,17 +12,12 @@ Doccupine is built on open standards, enabling customization and extensibility f
 
 To get started with Doccupine, make sure you have [Node.js](https://nodejs.org) and npm installed on your machine. Then, follow these steps:
 
-- **Install Doccupine CLI:**
+- **Run Doccupine CLI:**
 
-~~~bash
-npm install -g doccupine-beta
-~~~
-
-- **Create a new Doccupine project:**
 Create a new directory for your project and navigate to it in your terminal. Run the following command to create a new Doccupine project:
 
 ~~~bash
-doccupine-beta
+npx doccupine
 ~~~
 
 Once you run the command, Doccupine will ask you to select a directory to store your MDX files. Choose the directory where you want to create your documentation files.
@@ -33,7 +28,7 @@ This will start the development server on port 3000. Open your browser and navig
 - **Generate the website:**
 
 ~~~bash
-doccupine build
+npx doccupine build
 ~~~
 
 This will generate the build files for your documentation website without starting the development server. You can then deploy the generated files to a hosting service of your choice.
@@ -49,7 +44,7 @@ This will generate the build files for your documentation website without starti
 Start documenting your project by creating a new **index.mdx** file in the choosen MDX directory. You can use the following template as a starting point:
 
 ~~~text
- ---
+---
 title: "Home"
 description: "This is my first Doccupine project"
 date: "2025-01-15"
@@ -63,8 +58,7 @@ order: 0
 This is some **markdown** content with MDX support.
 ~~~
 
-In your MDX directory, you can structure your content using folders and files. Doccupine will automatically generate a navigation menu based on the configured categories and order. You can also use the *frontmatter* to add metadata to your content.
-
+In your MDX directory, you can structure your content using folders and files. Doccupine will automatically generate a navigation menu based on the configured categories and order.
 `;
 
 export const metadata: Metadata = {
