@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { 
+import {
   Container,
   StyledComponentsRegistry,
-  CherryThemeProvider 
+  CherryThemeProvider,
 } from "cherry-styled-components/src/lib";
 import { theme, themeDark } from "@/app/theme";
 import { Footer } from "@/components/layout/Footer";
@@ -15,11 +15,13 @@ import { transformPagesToGroupedStructure } from "@/utils/orderNavItems";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Doccupine',
-  description: 'Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.',
+  title: "Doccupine",
+  description:
+    "Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.",
   openGraph: {
-    title: 'Doccupine',
-    description: 'Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.',
+    title: "Doccupine",
+    description:
+      "Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.",
   },
 };
 
@@ -29,18 +31,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const defaultPages = [
-  {
-    "slug": "",
-    "title": "Getting Started",
-    "description": "Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.",
-    "date": "2025-01-15",
-    "category": "Introduction",
-    "categoryOrder": 0,
-    "order": 0
-  },
-];
+    {
+      slug: "",
+      title: "Getting Started",
+      description:
+        "Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.",
+      date: "2025-01-15",
+      category: "Introduction",
+      categoryOrder: 0,
+      order: 0,
+    },
+  ];
 
-  const pages = [];
+  const pages: any = [];
   const result = transformPagesToGroupedStructure(pages);
   const defaultResults = transformPagesToGroupedStructure(defaultPages);
 
