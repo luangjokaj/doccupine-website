@@ -40,7 +40,28 @@ export default async function RootLayout({
   },
 ];
 
-  const pages: any = [];
+  const pages: any = [
+  {
+    "slug": "commands",
+    "title": "Commands",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "General",
+    "path": "commands.mdx",
+    "categoryOrder": 0,
+    "order": 1
+  },
+  {
+    "slug": "",
+    "title": "Getting Started",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "General",
+    "path": "index.mdx",
+    "categoryOrder": 0,
+    "order": 0
+  }
+];
   const result = transformPagesToGroupedStructure(pages);
   const defaultResults = transformPagesToGroupedStructure(defaultPages);
 
