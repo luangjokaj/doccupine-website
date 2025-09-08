@@ -45,15 +45,16 @@ This will reset the current configuration for Doccupine.`;
 export const metadata: Metadata = {
   title: "Commands",
   description: "Doccupine CLI commands",
-  icons: "",
+  icons: "https://doccupine.com/favicon.ico",
   openGraph: {
     title: "Commands",
     description: "Doccupine CLI commands",
-    images: "",
-  },
+    images: "https://doccupine.com/preview.png",
+  }
 };
 
 export default function Page() {
-  return <Docs content={content} />;
+  return (
+    <Docs content={content} />
+  );
 }
-
