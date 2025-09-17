@@ -2,6 +2,7 @@
 import { mq, Theme } from "@/app/theme";
 import {
   resetButton,
+  styledSmall,
   styledStrong,
   styledText,
 } from "cherry-styled-components/src/lib";
@@ -110,6 +111,7 @@ export const StyledMarkdownContainer = styled.div`
   max-width: 640px;
   margin: auto;
   scroll-padding-top: 40px;
+  scroll-behavior: smooth;
 
   ${mq("lg")} {
     padding-bottom: 110px;
@@ -179,18 +181,27 @@ export const StyledIndexSidebar = styled.ul<{ theme: Theme }>`
 
   & li {
     padding: 5px 0;
+  }
+`;
 
-    & a {
-      ${({ theme }) => styledText(theme)};
-      color: ${({ theme }) => theme.colors.primary};
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
+export const StyledIndexSidebarLabel = styled.span<{ theme: Theme }>`
+  ${({ theme }) => styledSmall(theme)};
+  color: ${({ theme }) => theme.colors.grayDark};
+`;
 
-      &:hover {
-        color: ${({ theme }) => theme.colors.primaryDark};
-      }
-    }
+export const StyledIndexSidebarLink = styled.a<{
+  theme: Theme;
+  $isActive: boolean;
+}>`
+  ${({ theme }) => styledText(theme)};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.primary : theme.colors.dark};
+  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryDark};
   }
 `;
 

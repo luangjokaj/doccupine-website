@@ -52,4 +52,3 @@ export const metadata: Metadata = {
 export default function Home() {
   return <Docs content={indexContent} />;
 }
-
