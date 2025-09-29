@@ -51,8 +51,7 @@ You can use the Tabs component directly within your MDX files without any import
   <TabContent title="Third tab">
     💪 This third tab contains its own unique content.
   </TabContent>
-</Tabs>
-`;
+</Tabs>`;
 
 export const metadata: Metadata = {
   title: "Tabs",

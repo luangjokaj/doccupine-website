@@ -29,11 +29,11 @@ Use these common syntax options:
 ### Combining formats
 You can mix multiple styles at once for clarity:
 
-\`\`\`\`text
+\`\`\`text
 **_bold and italic_**
 **~~bold and strikethrough~~**
 *~~italic and strikethrough~~**
-\`\`\`\`
+\`\`\`
 
 ## Superscript and subscript
 For formulas, notes, or variables, use HTML tags:
@@ -83,7 +83,7 @@ For larger quotes spanning more than one paragraph:
 > This is a blockquote that spans multiple lines.
 > It can include several paragraphs of text.
 > Each new line starts with a \`>\` symbol.
-\`\`\` 
+\`\`\`
 
 > This is a blockquote that spans multiple lines.
 > It can include several paragraphs of text.
@@ -134,8 +134,7 @@ This is the next line.
 
 - Avoid vague text like “click here”
 - Prefer root-relative paths for internal links
-- Regularly validate links to ensure they are not broken
-`;
+- Regularly validate links to ensure they are not broken`;
 
 export const metadata: Metadata = {
   title: "Headers and Text",

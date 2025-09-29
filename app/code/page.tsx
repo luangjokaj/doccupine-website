@@ -38,9 +38,7 @@ class HelloWorld {
         System.out.println("Hello, World!");
     }
 }
-\`\`\`
-
-`;
+\`\`\``;
 
 export const metadata: Metadata = {
   title: "Code",
