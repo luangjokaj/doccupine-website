@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
 
 const content = `# Accordion
-Interactive panels for toggling visibility of content
+Interactive panels for toggling visibility of content.
 
 Accordion elements help organize information by letting users show or hide sections as needed. They’re an effective way to manage progressive disclosure and simplify navigation through dense or optional content.
 
