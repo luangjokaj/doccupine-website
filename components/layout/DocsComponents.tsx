@@ -28,7 +28,7 @@ const StyledDocsContainer = styled.div<{ theme: Theme }>`
   position: relative;
   padding: 0;
   width: 100%;
-  ${({ theme }) => styledText(theme)}
+  ${({ theme }) => styledText(theme)};
 
   ${mq("lg")} {
     padding-left: 320px;
@@ -100,6 +100,17 @@ const StyledDocsContainer = styled.div<{ theme: Theme }>`
       }
     }
   }
+
+  & img {
+    max-width: 100%;
+  }
+
+  & code:not([class]) {
+    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.2)};
+    color: ${({ theme }) => theme.colors.dark};
+    padding: 2px 4px;
+    border-radius: ${({ theme }) => theme.spacing.radius.xs};
+  }
 `;
 
 export const StyledMarkdownContainer = styled.div`
@@ -110,12 +121,6 @@ export const StyledMarkdownContainer = styled.div`
   flex: 1;
   max-width: 640px;
   margin: auto;
-  scroll-padding-top: 40px;
-  scroll-behavior: smooth;
-
-  ${mq("lg")} {
-    padding-bottom: 110px;
-  }
 `;
 
 interface Props {
@@ -126,7 +131,7 @@ interface Props {
 export const StyledSidebar = styled.nav<Props>`
   position: fixed;
   overflow-y: auto;
-  max-height: 100svh;
+  max-height: calc(100svh - 70px);
   width: 100%;
   z-index: 99;
   top: 70px;
@@ -140,14 +145,16 @@ export const StyledSidebar = styled.nav<Props>`
   background: ${({ theme }) => theme.colors.light};
 
   ${mq("lg")} {
-    top: 0;
-    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.1)};
-    width: 320px;
-    left: 0;
+    max-height: 100svh;
+    width: 220px;
+    background: transparent;
     padding: 90px 40px 40px;
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);
+    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.1)};
+    top: 0;
+    width: 320px;
   }
 
   ${({ $isActive }) =>

@@ -42,6 +42,46 @@ export default async function RootLayout({
 
   const pages: any = [
   {
+    "slug": "accordion",
+    "title": "Accordion",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "accordion.mdx",
+    "categoryOrder": 1,
+    "order": 3
+  },
+  {
+    "slug": "callouts",
+    "title": "Callouts",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "callouts.mdx",
+    "categoryOrder": 1,
+    "order": 6
+  },
+  {
+    "slug": "cards",
+    "title": "Cards",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "cards.mdx",
+    "categoryOrder": 1,
+    "order": 5
+  },
+  {
+    "slug": "code",
+    "title": "Code",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "code.mdx",
+    "categoryOrder": 1,
+    "order": 2
+  },
+  {
     "slug": "commands",
     "title": "Commands",
     "description": "Doccupine CLI commands",
@@ -60,6 +100,26 @@ export default async function RootLayout({
     "path": "index.mdx",
     "categoryOrder": 0,
     "order": 0
+  },
+  {
+    "slug": "tabs",
+    "title": "Tabs",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "tabs.mdx",
+    "categoryOrder": 1,
+    "order": 4
+  },
+  {
+    "slug": "text",
+    "title": "Headers and Text",
+    "description": "Doccupine CLI commands",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "text.mdx",
+    "categoryOrder": 1,
+    "order": 1
   }
 ];
   const result = transformPagesToGroupedStructure(pages);

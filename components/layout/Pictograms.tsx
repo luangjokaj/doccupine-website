@@ -1,14 +1,12 @@
 "use client";
 import React from "react";
 import { useTheme } from "styled-components";
-import { Theme } from "@/app/theme";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   className?: string;
 }
 
 function Logo({ ...props }: Props) {
-  const theme = useTheme() as Theme;
   return (
     <svg
       width="164"
