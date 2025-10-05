@@ -51,7 +51,8 @@ You can use the Tabs component directly within your MDX files without any import
   <TabContent title="Third tab">
     💪 This third tab contains its own unique content.
   </TabContent>
-</Tabs>`;
+</Tabs>
+`;
 
 export const metadata: Metadata = {
   title: "Tabs",
@@ -61,11 +62,9 @@ export const metadata: Metadata = {
     title: "Tabs",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

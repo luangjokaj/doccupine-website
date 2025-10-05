@@ -49,7 +49,8 @@ You can use the Callouts component directly within your MDX files without any im
 
 <Callout type="success">
  This is a success callout
-</Callout>`;
+</Callout>
+`;
 
 export const metadata: Metadata = {
   title: "Callouts",
@@ -59,11 +60,9 @@ export const metadata: Metadata = {
     title: "Callouts",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

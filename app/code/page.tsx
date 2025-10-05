@@ -38,7 +38,8 @@ class HelloWorld {
         System.out.println("Hello, World!");
     }
 }
-\`\`\``;
+\`\`\`
+`;
 
 export const metadata: Metadata = {
   title: "Code",
@@ -48,11 +49,9 @@ export const metadata: Metadata = {
     title: "Code",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

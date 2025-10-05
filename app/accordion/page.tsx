@@ -33,7 +33,8 @@ You can use the Accordion component directly within your MDX files without any i
         }
     }
   \`\`\`
-</Accordion>`;
+</Accordion>
+`;
 
 export const metadata: Metadata = {
   title: "Accordion",
@@ -43,11 +44,9 @@ export const metadata: Metadata = {
     title: "Accordion",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

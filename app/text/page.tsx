@@ -144,11 +144,9 @@ export const metadata: Metadata = {
     title: "Headers and Text",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

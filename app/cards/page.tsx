@@ -17,7 +17,8 @@ You can use the Cards component directly within your MDX files without any impor
 
 <Card title="Note" icon="BadgeInfo">
   Doccupine CLI is a command-line tool that helps you create and manage your Doccupine project. It provides a simple and intuitive interface for creating and configuring your project.
-</Card>`;
+</Card>
+`;
 
 export const metadata: Metadata = {
   title: "Cards",
@@ -27,11 +28,9 @@ export const metadata: Metadata = {
     title: "Cards",
     description: "Doccupine CLI commands",
     images: "https://doccupine.com/preview.png",
-  }
+  },
 };
 
 export default function Page() {
-  return (
-    <Docs content={content} />
-  );
+  return <Docs content={content} />;
 }

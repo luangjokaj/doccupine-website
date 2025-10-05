@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import { 
   Container,
   StyledComponentsRegistry,
-  CherryThemeProvider 
 } from "cherry-styled-components/src/lib";
 import { theme, themeDark } from "@/app/theme";
+import { CherryThemeProvider } from "@/components/layout/CherryThemeProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { DocsWrapper } from "@/components/layout/DocsComponents";
@@ -49,7 +49,7 @@ export default async function RootLayout({
     "category": "Components",
     "path": "accordion.mdx",
     "categoryOrder": 1,
-    "order": 3
+    "order": 4
   },
   {
     "slug": "callouts",
@@ -59,7 +59,7 @@ export default async function RootLayout({
     "category": "Components",
     "path": "callouts.mdx",
     "categoryOrder": 1,
-    "order": 6
+    "order": 7
   },
   {
     "slug": "cards",
@@ -69,7 +69,7 @@ export default async function RootLayout({
     "category": "Components",
     "path": "cards.mdx",
     "categoryOrder": 1,
-    "order": 5
+    "order": 6
   },
   {
     "slug": "code",
@@ -79,7 +79,7 @@ export default async function RootLayout({
     "category": "Components",
     "path": "code.mdx",
     "categoryOrder": 1,
-    "order": 2
+    "order": 3
   },
   {
     "slug": "commands",
@@ -92,6 +92,36 @@ export default async function RootLayout({
     "order": 1
   },
   {
+    "slug": "fields",
+    "title": "Fields",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "fields.mdx",
+    "categoryOrder": 0,
+    "order": 9
+  },
+  {
+    "slug": "icons",
+    "title": "Icons",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "icons.mdx",
+    "categoryOrder": 0,
+    "order": 8
+  },
+  {
+    "slug": "image-embeds",
+    "title": "Images and embeds",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "image-embeds.mdx",
+    "categoryOrder": 0,
+    "order": 7
+  },
+  {
     "slug": "",
     "title": "Getting Started",
     "description": "This is my first Doccupine project",
@@ -102,6 +132,16 @@ export default async function RootLayout({
     "order": 0
   },
   {
+    "slug": "list-table",
+    "title": "Lists and tables",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "list-table.mdx",
+    "categoryOrder": 0,
+    "order": 2
+  },
+  {
     "slug": "tabs",
     "title": "Tabs",
     "description": "Doccupine CLI commands",
@@ -109,7 +149,7 @@ export default async function RootLayout({
     "category": "Components",
     "path": "tabs.mdx",
     "categoryOrder": 1,
-    "order": 4
+    "order": 5
   },
   {
     "slug": "text",
