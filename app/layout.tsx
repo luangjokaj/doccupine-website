@@ -160,6 +160,16 @@ export default async function RootLayout({
     "path": "text.mdx",
     "categoryOrder": 1,
     "order": 1
+  },
+  {
+    "slug": "update",
+    "title": "Update",
+    "description": "This is my first Doccupine project",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "update.mdx",
+    "categoryOrder": 0,
+    "order": 10
   }
 ];
   const result = transformPagesToGroupedStructure(pages);
