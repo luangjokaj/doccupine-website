@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Headers and Text
 Learn how to structure and style your content with headers, formatting, and links.
@@ -134,16 +135,17 @@ This is the next line.
 
 - Avoid vague text like “click here”
 - Prefer root-relative paths for internal links
-- Regularly validate links to ensure they are not broken`;
+- Regularly validate links to ensure they are not broken
+`;
 
 export const metadata: Metadata = {
-  title: "Headers and Text",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Learn how to structure and style your content with headers, formatting, and links.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Headers and Text",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Learn how to structure and style your content with headers, formatting, and links.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

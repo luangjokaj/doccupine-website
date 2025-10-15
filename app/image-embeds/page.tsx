@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Images and embeds
 
@@ -98,13 +99,13 @@ For demonstration videos that loop or start automatically, add attributes as sho
 `;
 
 export const metadata: Metadata = {
-  title: "Images and embeds",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Images and embeds ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Enrich your documentation with visuals, videos, and interactive embeds.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Images and embeds",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `Images and embeds ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Enrich your documentation with visuals, videos, and interactive embeds.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

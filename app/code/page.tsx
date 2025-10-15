@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Code
 Learn how to display inline code and code blocks in documentation.
@@ -42,13 +43,13 @@ class HelloWorld {
 `;
 
 export const metadata: Metadata = {
-  title: "Code",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Code ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Learn how to display inline code and code blocks in documentation.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Code",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Code ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Learn how to display inline code and code blocks in documentation.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

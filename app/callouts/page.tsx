@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Callouts
 Make your content stand out by using callouts for extra emphasis.
@@ -50,16 +51,26 @@ You can use the Callouts component directly within your MDX files without any im
 <Callout type="success">
  This is a success callout
 </Callout>
+
+## Properties
+
+<Field value="type" type="string" required>
+  The type of the callout.
+</Field>
+
+<Field value="children" type="string" required>
+  The content of the callout.
+</Field>  
 `;
 
 export const metadata: Metadata = {
-  title: "Callouts",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Callouts ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Make your content stand out by using callouts for extra emphasis.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Callouts",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Callouts ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Make your content stand out by using callouts for extra emphasis.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

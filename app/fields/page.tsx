@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Fields
 
@@ -35,17 +36,16 @@ Use the \`<Field>\` component to declare API or SDK parameters, or define the re
 <Field value="required" type="boolean">
   Whether the field is required.
 </Field>
-
 `;
 
 export const metadata: Metadata = {
-  title: "Fields",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Fields ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Configure parameters for your API or SDK documentation.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Fields",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `Fields ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Configure parameters for your API or SDK documentation.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

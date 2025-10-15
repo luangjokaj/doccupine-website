@@ -11,6 +11,7 @@ import { Header } from "@/components/layout/Header";
 import { DocsWrapper } from "@/components/layout/DocsComponents";
 import { SideBar } from "@/components/SideBar";
 import { transformPagesToGroupedStructure } from "@/utils/orderNavItems";
+import navigation from "@/navigation.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +45,7 @@ export default async function RootLayout({
   {
     "slug": "accordion",
     "title": "Accordion",
-    "description": "Doccupine CLI commands",
+    "description": "Interactive panels for toggling visibility of content.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "accordion.mdx",
@@ -54,7 +55,7 @@ export default async function RootLayout({
   {
     "slug": "callouts",
     "title": "Callouts",
-    "description": "Doccupine CLI commands",
+    "description": "Make your content stand out by using callouts for extra emphasis.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "callouts.mdx",
@@ -64,7 +65,7 @@ export default async function RootLayout({
   {
     "slug": "cards",
     "title": "Cards",
-    "description": "Doccupine CLI commands",
+    "description": "Cards act as visual containers for your content, giving you flexibility to combine text, icons, images, and links in a clean and organized way.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "cards.mdx",
@@ -74,7 +75,7 @@ export default async function RootLayout({
   {
     "slug": "code",
     "title": "Code",
-    "description": "Doccupine CLI commands",
+    "description": "Learn how to display inline code and code blocks in documentation.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "code.mdx",
@@ -84,7 +85,7 @@ export default async function RootLayout({
   {
     "slug": "commands",
     "title": "Commands",
-    "description": "Doccupine CLI commands",
+    "description": "In this page, you can find all the commands available in Doccupine CLI.",
     "date": "2025-01-15",
     "category": "General",
     "path": "commands.mdx",
@@ -94,7 +95,7 @@ export default async function RootLayout({
   {
     "slug": "fields",
     "title": "Fields",
-    "description": "This is my first Doccupine project",
+    "description": "Configure parameters for your API or SDK documentation.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "fields.mdx",
@@ -104,7 +105,7 @@ export default async function RootLayout({
   {
     "slug": "icons",
     "title": "Icons",
-    "description": "This is my first Doccupine project",
+    "description": "Integrate visual icons from well-known libraries to enrich your documentation.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "icons.mdx",
@@ -114,7 +115,7 @@ export default async function RootLayout({
   {
     "slug": "image-embeds",
     "title": "Images and embeds",
-    "description": "This is my first Doccupine project",
+    "description": "Enrich your documentation with visuals, videos, and interactive embeds.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "image-embeds.mdx",
@@ -124,7 +125,7 @@ export default async function RootLayout({
   {
     "slug": "",
     "title": "Getting Started",
-    "description": "This is my first Doccupine project",
+    "description": "Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.",
     "date": "2025-01-15",
     "category": "General",
     "path": "index.mdx",
@@ -134,7 +135,7 @@ export default async function RootLayout({
   {
     "slug": "list-table",
     "title": "Lists and tables",
-    "description": "This is my first Doccupine project",
+    "description": "Present structured information using lists or tables.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "list-table.mdx",
@@ -144,7 +145,7 @@ export default async function RootLayout({
   {
     "slug": "tabs",
     "title": "Tabs",
-    "description": "Doccupine CLI commands",
+    "description": "Use the Tabs component to display different content sections in a switchable panel layout.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "tabs.mdx",
@@ -154,7 +155,7 @@ export default async function RootLayout({
   {
     "slug": "text",
     "title": "Headers and Text",
-    "description": "Doccupine CLI commands",
+    "description": "Learn how to structure and style your content with headers, formatting, and links.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "text.mdx",
@@ -164,7 +165,7 @@ export default async function RootLayout({
   {
     "slug": "update",
     "title": "Update",
-    "description": "This is my first Doccupine project",
+    "description": "Easily manage and present change history.",
     "date": "2025-01-15",
     "category": "Components",
     "path": "update.mdx",
@@ -172,7 +173,9 @@ export default async function RootLayout({
     "order": 10
   }
 ];
-  const result = transformPagesToGroupedStructure(pages);
+  const result = navigation.length
+    ? navigation
+    : transformPagesToGroupedStructure(pages);
   const defaultResults = transformPagesToGroupedStructure(defaultPages);
 
   return (

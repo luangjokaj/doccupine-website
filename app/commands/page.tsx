@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Commands
 
@@ -40,16 +41,17 @@ This will show the current configuration for Doccupine.
 npx doccupine config --reset
 ~~~
   
-This will reset the current configuration for Doccupine.`;
+This will reset the current configuration for Doccupine.
+`;
 
 export const metadata: Metadata = {
-  title: "Commands",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Commands ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `In this page, you can find all the commands available in Doccupine CLI.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Commands",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Commands ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `In this page, you can find all the commands available in Doccupine CLI.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

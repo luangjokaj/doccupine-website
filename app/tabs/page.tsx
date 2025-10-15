@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Tabs
 Use the Tabs component to display different content sections in a switchable panel layout.
@@ -52,16 +53,27 @@ You can use the Tabs component directly within your MDX files without any import
     💪 This third tab contains its own unique content.
   </TabContent>
 </Tabs>
+
+## Properties
+
+<Field value="title" type="string">
+  The title of the tab.
+</Field>
+
+<Field value="children" type="string" required>
+  The content of the tabs.
+</Field>
+
 `;
 
 export const metadata: Metadata = {
-  title: "Tabs",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Tabs ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Use the Tabs component to display different content sections in a switchable panel layout.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Tabs",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Tabs ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Use the Tabs component to display different content sections in a switchable panel layout.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

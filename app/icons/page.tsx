@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Icons
 
@@ -41,13 +42,13 @@ You can use icons directly within text to highlight information or add visual co
 `;
 
 export const metadata: Metadata = {
-  title: "Icons",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Icons ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Integrate visual icons from well-known libraries to enrich your documentation.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Icons",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `Icons ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Integrate visual icons from well-known libraries to enrich your documentation.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

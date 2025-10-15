@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const indexContent = `# Welcome to Doccupine
 
@@ -39,17 +40,16 @@ In your MDX directory, you can structure your content using folders and files. D
 `;
 
 export const metadata: Metadata = {
-  title: "Doccupine - Getting Started",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `${config.name ? config.name + " -" : "Doccupine -"} Getting Started`,
+  description: `Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.`,
+  icons: `https://doccupine.com/favicon.ico`,
   openGraph: {
-    title: "Doccupine - Getting Started",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `${config.name ? config.name + " -" : "Doccupine -"} Getting Started`,
+    description: `Doccupine is a free and open-source document management system that allows you to store, organize, and share your documentation with ease.`,
+    images: `https://doccupine.com/preview.png`,
   },
 };
 
 export default function Home() {
   return <Docs content={indexContent} />;
 }
-

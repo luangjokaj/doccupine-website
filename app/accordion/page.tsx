@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Accordion
 Interactive panels for toggling visibility of content.
@@ -34,16 +35,26 @@ You can use the Accordion component directly within your MDX files without any i
     }
   \`\`\`
 </Accordion>
+
+## Properties
+
+<Field value="title" type="string" required>
+  The title of the accordion.
+</Field>
+
+<Field value="children" type="string" required>
+  The content of the accordion.
+</Field>
 `;
 
 export const metadata: Metadata = {
-  title: "Accordion",
-  description: "Doccupine CLI commands",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Accordion ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Interactive panels for toggling visibility of content.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Accordion",
-    description: "Doccupine CLI commands",
-    images: "https://doccupine.com/preview.png",
+    title: `Accordion ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Interactive panels for toggling visibility of content.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

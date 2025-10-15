@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Lists and Tables
 
@@ -82,13 +83,13 @@ Markdown tables use pipes (\`|\`) to separate columns and hyphens (\`---\`) to d
 `;
 
 export const metadata: Metadata = {
-  title: "Lists and tables",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Lists and tables ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Present structured information using lists or tables.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Lists and tables",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `Lists and tables ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Present structured information using lists or tables.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 

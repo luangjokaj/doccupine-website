@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
+import config from "@/config.json";
 
 const content = `# Update
 
@@ -53,13 +54,13 @@ You can combine multiple \`Update\` components to build complete changelogs.
 `;
 
 export const metadata: Metadata = {
-  title: "Update",
-  description: "This is my first Doccupine project",
-  icons: "https://doccupine.com/favicon.ico",
+  title: `Update ${config.name ? "- " + config.name : "- Doccupine"}`,
+  description: `Easily manage and present change history.`,
+  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
   openGraph: {
-    title: "Update",
-    description: "This is my first Doccupine project",
-    images: "https://doccupine.com/preview.png",
+    title: `Update ${config.name ? "- " + config.name : "- Doccupine"}`,
+    description: `Easily manage and present change history.`,
+    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
   },
 };
 
