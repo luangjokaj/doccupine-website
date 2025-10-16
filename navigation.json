@@ -3,12 +3,10 @@
     "label": "General",
     "links": [
       {
-        "date": "2025-01-15",
         "slug": "",
         "title": "Getting Started"
       },
       {
-        "date": "2025-01-15",
         "slug": "commands",
         "title": "Commands"
       }
@@ -18,59 +16,61 @@
     "label": "Components",
     "links": [
       {
-        "date": "2025-01-15",
         "slug": "text",
         "title": "Headers and Text"
       },
       {
-        "date": "2025-01-15",
         "slug": "list-table",
         "title": "Lists and tables"
       },
       {
-        "date": "2025-01-15",
         "slug": "code",
         "title": "Code"
       },
       {
-        "date": "2025-01-15",
         "slug": "accordion",
         "title": "Accordion"
       },
       {
-        "date": "2025-01-15",
         "slug": "tabs",
         "title": "Tabs"
       },
       {
-        "date": "2025-01-15",
         "slug": "cards",
         "title": "Cards"
       },
       {
-        "date": "2025-01-15",
         "slug": "callouts",
         "title": "Callouts"
       },
       {
-        "date": "2025-01-15",
         "slug": "image-embeds",
         "title": "Images and embeds"
       },
       {
-        "date": "2025-01-15",
         "slug": "icons",
         "title": "Icons"
       },
       {
-        "date": "2025-01-15",
         "slug": "fields",
         "title": "Fields"
       },
       {
-        "date": "2025-01-15",
         "slug": "update",
         "title": "Update"
+      }
+    ]
+  },
+  {
+    "label": "Configuration",
+    "links": [
+      {
+        "slug": "config",
+        "title": "Globals"
+      },
+      {
+        "slug": "navigation",
+        "title": "Navigation"
       }
     ]
   }

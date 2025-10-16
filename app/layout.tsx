@@ -93,6 +93,16 @@ export default async function RootLayout({
     "order": 1
   },
   {
+    "slug": "config",
+    "title": "Globals",
+    "description": "Configure global settings for your documentation.",
+    "date": "2025-01-15",
+    "category": "Configuration",
+    "path": "config.mdx",
+    "categoryOrder": 3,
+    "order": 1
+  },
+  {
     "slug": "fields",
     "title": "Fields",
     "description": "Configure parameters for your API or SDK documentation.",
@@ -140,6 +150,16 @@ export default async function RootLayout({
     "category": "Components",
     "path": "list-table.mdx",
     "categoryOrder": 0,
+    "order": 2
+  },
+  {
+    "slug": "navigation",
+    "title": "Navigation",
+    "description": "Organize and structure your navigation.",
+    "date": "2025-01-15",
+    "category": "Configuration",
+    "path": "navigation.mdx",
+    "categoryOrder": 3,
     "order": 2
   },
   {
