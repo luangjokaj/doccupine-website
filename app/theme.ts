@@ -1,4 +1,3 @@
-
 "use client";
 export const breakpoints: Breakpoints = {
   xs: 0,
