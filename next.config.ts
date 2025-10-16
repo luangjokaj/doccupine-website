@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 const path = require("path");
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: path.join(__dirname, "../../"),
+  outputFileTracingRoot: path.join(__dirname, ".next"),
   compiler: {
     styledComponents: true,
   },
