@@ -58,6 +58,10 @@
       {
         "slug": "update",
         "title": "Update"
+      },
+      {
+        "slug": "columns",
+        "title": "Columns"
       }
     ]
   },

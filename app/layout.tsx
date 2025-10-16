@@ -83,6 +83,16 @@ export default async function RootLayout({
     "order": 3
   },
   {
+    "slug": "columns",
+    "title": "Columns",
+    "description": "Columns are used to organize content in a grid-like structure.",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "columns.mdx",
+    "categoryOrder": 1,
+    "order": 12
+  },
+  {
     "slug": "commands",
     "title": "Commands",
     "description": "In this page, you can find all the commands available in Doccupine CLI.",
