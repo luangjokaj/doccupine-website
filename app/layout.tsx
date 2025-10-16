@@ -173,6 +173,16 @@ export default async function RootLayout({
     "order": 2
   },
   {
+    "slug": "steps",
+    "title": "Steps",
+    "description": "Guide readers step-by-step using the Steps component.",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "steps.mdx",
+    "categoryOrder": 1,
+    "order": 13
+  },
+  {
     "slug": "tabs",
     "title": "Tabs",
     "description": "Use the Tabs component to display different content sections in a switchable panel layout.",
