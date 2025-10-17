@@ -42,10 +42,9 @@ You can use the Accordion component directly within your MDX files without any i
   The title of the accordion.
 </Field>
 
-<Field value="children" type="string" required>
+<Field value="children" type="node" required>
   The content of the accordion.
-</Field>
-`;
+</Field>`;
 
 export const metadata: Metadata = {
   title: `Accordion ${config.name ? "- " + config.name : "- Doccupine"}`,

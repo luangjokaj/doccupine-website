@@ -39,8 +39,7 @@ class HelloWorld {
         System.out.println("Hello, World!");
     }
 }
-\`\`\`
-`;
+\`\`\``;
 
 export const metadata: Metadata = {
   title: `Code ${config.name ? "- " + config.name : "- Doccupine"}`,

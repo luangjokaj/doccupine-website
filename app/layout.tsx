@@ -119,8 +119,8 @@ export default async function RootLayout({
     "date": "2025-01-15",
     "category": "Components",
     "path": "fields.mdx",
-    "categoryOrder": 0,
-    "order": 9
+    "categoryOrder": 1,
+    "order": 10
   },
   {
     "slug": "icons",
@@ -129,8 +129,8 @@ export default async function RootLayout({
     "date": "2025-01-15",
     "category": "Components",
     "path": "icons.mdx",
-    "categoryOrder": 0,
-    "order": 8
+    "categoryOrder": 1,
+    "order": 9
   },
   {
     "slug": "image-embeds",
@@ -139,8 +139,8 @@ export default async function RootLayout({
     "date": "2025-01-15",
     "category": "Components",
     "path": "image-embeds.mdx",
-    "categoryOrder": 0,
-    "order": 7
+    "categoryOrder": 1,
+    "order": 8
   },
   {
     "slug": "",
@@ -159,7 +159,7 @@ export default async function RootLayout({
     "date": "2025-01-15",
     "category": "Components",
     "path": "list-table.mdx",
-    "categoryOrder": 0,
+    "categoryOrder": 1,
     "order": 2
   },
   {
@@ -209,8 +209,8 @@ export default async function RootLayout({
     "date": "2025-01-15",
     "category": "Components",
     "path": "update.mdx",
-    "categoryOrder": 0,
-    "order": 10
+    "categoryOrder": 1,
+    "order": 11
   }
 ];
   const result = navigation.length

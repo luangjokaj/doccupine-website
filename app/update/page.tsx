@@ -3,7 +3,6 @@ import { Docs } from "@/components/Docs";
 import config from "@/config.json";
 
 const content = `# Update
-
 Easily manage and present change history.
 
 The \`Update\` component helps you display release notes, version details, and changelogs in a standardized format.
@@ -23,10 +22,9 @@ The \`Update\` component helps you display release notes, version details, and c
 </Update>
 
 ## Update Usage
-
 You can combine multiple \`Update\` components to build complete changelogs.
 
-~~~text
+\`\`\`mdx
 <Update label="Example" description="v0.0.1">
   ## Example entry
 
@@ -40,7 +38,7 @@ You can combine multiple \`Update\` components to build complete changelogs.
   - Individual anchor for each update
   - Automatic RSS feed entry generation
 </Update>
-~~~
+\`\`\`
 
 ## Properties
 
@@ -51,7 +49,10 @@ You can combine multiple \`Update\` components to build complete changelogs.
 <Field value="description" type="string" required>
   The description of the update.
 </Field>
-`;
+
+<Field value="children" type="node" required>
+  The content of the update.
+</Field>`;
 
 export const metadata: Metadata = {
   title: `Update ${config.name ? "- " + config.name : "- Doccupine"}`,

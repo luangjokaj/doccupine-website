@@ -3,11 +3,9 @@ import { Docs } from "@/components/Docs";
 import config from "@/config.json";
 
 const content = `# Global Configuration
-
 Use a \`config.json\` file to define project‑wide metadata for your documentation site. These values are applied to every generated page unless a page overrides them in its own frontmatter.
 
 ## config.json
-
 Place a \`config.json\` at your project root (the same folder where you execute \`npx doccupine\`) to define global metadata for your documentation site.
 
 \`\`\`json
@@ -20,14 +18,12 @@ Place a \`config.json\` at your project root (the same folder where you execute 
 \`\`\`
 
 ## Fields
-
 - **name**: The primary name of your documentation website. Displayed in the site title and used in various UI elements.
 - **description**: A concise summary of your project, used in site metadata (e.g., HTML meta description) and social previews when not overridden.
 - **icon**: The favicon for your site. You can provide a full URL or a relative path to an asset in your project.
 - **preview**: The Open Graph image used when links to your docs are shared. Accepts a full URL or a relative path.
 
 ## Per‑page overrides
-
 Any page can override these global values by defining the same keys in its frontmatter. When present, the page’s values take precedence over \`config.json\` for that page only.
 
 Example frontmatter in an \`.mdx\` file:
@@ -44,8 +40,7 @@ category: "Guides"
 ---
 \`\`\`
 
-If a key is not specified in a page’s frontmatter, Doccupine falls back to the corresponding value in \`config.json\`.
-`;
+If a key is not specified in a page’s frontmatter, Doccupine falls back to the corresponding value in \`config.json\`.`;
 
 export const metadata: Metadata = {
   title: `Globals ${config.name ? "- " + config.name : "- Doccupine"}`,
