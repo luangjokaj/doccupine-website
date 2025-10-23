@@ -170,7 +170,7 @@ interface Props {
 export const StyledSidebar = styled.nav<Props>`
   position: fixed;
   overflow-y: auto;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100svh - 70px);
   width: 100%;
   z-index: 99;
   top: 70px;

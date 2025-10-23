@@ -53,6 +53,16 @@ export default async function RootLayout({
     "order": 4
   },
   {
+    "slug": "buttons",
+    "title": "Buttons",
+    "description": "A flexible action component supporting variants, sizes, icons, and links.",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "buttons.mdx",
+    "categoryOrder": 1,
+    "order": 7
+  },
+  {
     "slug": "callouts",
     "title": "Callouts",
     "description": "Make your content stand out by using callouts for extra emphasis.",
@@ -201,6 +211,16 @@ export default async function RootLayout({
     "path": "text.mdx",
     "categoryOrder": 1,
     "order": 1
+  },
+  {
+    "slug": "theme",
+    "title": "Theme",
+    "description": "Customize the documentation UI colors with a theme.json file.",
+    "date": "2025-01-15",
+    "category": "Configuration",
+    "path": "theme.mdx",
+    "categoryOrder": 3,
+    "order": 3
   },
   {
     "slug": "update",

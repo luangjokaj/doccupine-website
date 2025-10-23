@@ -1,20 +1,17 @@
 "use client";
-import { Flex, MaxWidth, resetButton } from "cherry-styled-components/src/lib";
+import { Flex, MaxWidth } from "cherry-styled-components/src/lib";
 import React, { useCallback, useRef, useState, Suspense } from "react";
-import styled, { css } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import Link from "next/link";
 import { rgba } from "polished";
 import { mq, Theme } from "@/app/theme";
-import {
+import { 
   ToggleTheme,
   ToggleThemeLoading,
 } from "@/components/layout/ThemeToggle";
-import {
-  StyledTinyDesktopOnly,
-  StyledTinyMobileOnly,
-} from "@/components/layout/SharedStyled";
 import { useOnClickOutside } from "@/components/ClickOutside";
 import { Logo } from "@/components/layout/Pictograms";
+import themeJson from "@/theme.json";
 
 const StyledHeader = styled.header<{ theme: Theme }>`
   position: sticky;
@@ -49,8 +46,12 @@ const StyledHeader = styled.header<{ theme: Theme }>`
   & .logo {
     display: flex;
 
-    & svg {
+    & svg,
+    & img {
       margin: auto;
+      width: 100%;
+      max-width: max-content;
+      height: auto;
 
       & path[fill] {
         fill: ${({ theme }) => theme.colors.primary};
@@ -62,7 +63,6 @@ const StyledHeader = styled.header<{ theme: Theme }>`
 function Header() {
   const [isOptionActive, setIsOptionActive] = useState(false);
   const [isLangActive, setIsLangActive] = useState(false);
-  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   const wrapperRef = useRef<HTMLSpanElement>(null);
   const elmRef = useRef<HTMLDivElement>(null);
@@ -77,6 +77,7 @@ function Header() {
     isOptionActive ? closeMenu : () => {},
   );
   useOnClickOutside([langRef, wrapperRef], isLangActive ? closeMenu : () => {});
+  const theme = useTheme() as Theme;
 
   return (
     <>
@@ -84,12 +85,25 @@ function Header() {
         <MaxWidth $size={1000}>
           <Flex $justifyContent="space-between" $wrap="nowrap">
             <Link href="/" className="logo" aria-label="Logo">
-              <StyledTinyDesktopOnly>
+              {themeJson.logo ? (
+                theme.isDark ? (
+                  <img
+                    src={themeJson.logo.dark}
+                    alt="Logo"
+                    width="100"
+                    height="100"
+                  />
+                ) : (
+                  <img
+                    src={themeJson.logo.light}
+                    alt="Logo"
+                    width="100"
+                    height="100"
+                  />
+                )
+              ) : (
                 <Logo />
-              </StyledTinyDesktopOnly>
-              <StyledTinyMobileOnly>
-                <Logo />
-              </StyledTinyMobileOnly>
+              )}
             </Link>
             <Suspense fallback={<ToggleThemeLoading />}>
               <ToggleTheme />

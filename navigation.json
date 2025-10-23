@@ -28,6 +28,10 @@
         "title": "Code"
       },
       {
+        "slug": "buttons",
+        "title": "Buttons"
+      },
+      {
         "slug": "accordion",
         "title": "Accordion"
       },
@@ -79,6 +83,10 @@
       {
         "slug": "navigation",
         "title": "Navigation"
+      },
+      {
+        "slug": "theme",
+        "title": "Theme"
       }
     ]
   }
