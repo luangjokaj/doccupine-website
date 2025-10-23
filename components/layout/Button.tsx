@@ -6,7 +6,7 @@ import {
   ButtonProps,
   buttonStyles,
 } from "cherry-styled-components/src/lib";
-import { Icon, IconProps } from "@/components/layout/Icon";
+import { Icon } from "@/components/layout/Icon";
 
 interface LinkButtonProps extends ButtonProps {
   href?: string;
@@ -15,7 +15,7 @@ interface LinkButtonProps extends ButtonProps {
   size?: "default" | "big";
   outline?: boolean;
   fullWidth?: boolean;
-  icon?: IconProps;
+  icon?: string;
   iconPosition?: "left" | "right";
 }
 
