@@ -95,7 +95,6 @@ Place a \`theme.json\` at your project root (the same folder where you execute \
 - **Iterate**: Adjust colors and refresh the site to preview changes quickly.
 
 # Demo
-
 In the following demos, you can see how the theme can be changed. To override the theme, create a \`theme.json\` file in the project root and copy paste the code below.
 
 <DemoTheme variant="purple" />
@@ -246,8 +245,7 @@ In the following demos, you can see how the theme can be changed. To override th
 }
 \`\`\`
 
-<DemoTheme variant="yellow" />
-`;
+<DemoTheme variant="yellow" />`;
 
 export const metadata: Metadata = {
   title: `Theme ${config.name ? "- " + config.name : "- Doccupine"}`,

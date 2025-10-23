@@ -10,48 +10,48 @@ Buttons help users initiate actions or navigate to other pages. Use variants to 
 ## Button Usage
 You can use the Button component directly within your MDX files without any import. The following examples show basic usage:
 
-~~~mdx
+\`\`\`mdx
 <Button>Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="tertiary">Tertiary</Button>
-~~~
+\`\`\`
 
-<Button variant="primary">Primary</Button>
+<Button>Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="tertiary">Tertiary</Button>
 
 ### Sizes
 
-~~~mdx
+\`\`\`mdx
 <Button size="default">Default size</Button>
 <Button size="big">Big size</Button>
-~~~
+\`\`\`
 
 <Button size="default">Default size</Button>
 <Button size="big">Big size</Button>
 
 ### Outline
 
-~~~mdx
-<Button outline icon="arrow-right">Outlined</Button>
-~~~
+\`\`\`mdx
+<Button outline>Outlined</Button>
+\`\`\`
 
 <Button outline>Outlined</Button>
 
 ### Full width
 
-~~~mdx
+\`\`\`mdx
 <Button fullWidth>Full width button</Button>
-~~~
+\`\`\`
 
 <Button fullWidth>Full width button</Button>
 
 ### With icon
 
-~~~mdx
+\`\`\`mdx
 <Button icon="arrow-right" iconPosition="left">With left icon</Button>
 <Button icon="arrow-right" iconPosition="right">With right icon</Button>
-~~~
+\`\`\`
 
 <Button icon="arrow-right" iconPosition="left">With left icon</Button>
 <Button icon="arrow-right" iconPosition="right">With right icon</Button>
@@ -59,9 +59,9 @@ You can use the Button component directly within your MDX files without any impo
 ### As a link
 Buttons can render as links when you provide an \`href\`.
 
-~~~mdx
+\`\`\`mdx
 <Button href="/">Home</Button>
-~~~
+\`\`\`
 
 <Button href="/">Home</Button>
 
@@ -109,8 +109,7 @@ Buttons can render as links when you provide an \`href\`.
 
 <Field value="href" type="string">
   When provided, the button renders as a link (\`<a>\`), enabling navigation.
-</Field>
-`;
+</Field>`;
 
 export const metadata: Metadata = {
   title: `Buttons ${config.name ? "- " + config.name : "- Doccupine"}`,

@@ -113,16 +113,6 @@ export default async function RootLayout({
     "order": 1
   },
   {
-    "slug": "config",
-    "title": "Globals",
-    "description": "Configure global settings for your documentation.",
-    "date": "2025-01-15",
-    "category": "Configuration",
-    "path": "config.mdx",
-    "categoryOrder": 3,
-    "order": 1
-  },
-  {
     "slug": "fields",
     "title": "Fields",
     "description": "Configure parameters for your API or SDK documentation.",
@@ -131,6 +121,26 @@ export default async function RootLayout({
     "path": "fields.mdx",
     "categoryOrder": 1,
     "order": 10
+  },
+  {
+    "slug": "globals",
+    "title": "Globals",
+    "description": "Configure global settings for your documentation.",
+    "date": "2025-01-15",
+    "category": "Configuration",
+    "path": "globals.mdx",
+    "categoryOrder": 3,
+    "order": 1
+  },
+  {
+    "slug": "headers-and-text",
+    "title": "Headers and Text",
+    "description": "Learn how to structure and style your content with headers, formatting, and links.",
+    "date": "2025-01-15",
+    "category": "Components",
+    "path": "headers-and-text.mdx",
+    "categoryOrder": 1,
+    "order": 1
   },
   {
     "slug": "icons",
@@ -143,12 +153,12 @@ export default async function RootLayout({
     "order": 9
   },
   {
-    "slug": "image-embeds",
+    "slug": "image-and-embeds",
     "title": "Images and embeds",
     "description": "Enrich your documentation with visuals, videos, and interactive embeds.",
     "date": "2025-01-15",
     "category": "Components",
-    "path": "image-embeds.mdx",
+    "path": "image-and-embeds.mdx",
     "categoryOrder": 1,
     "order": 8
   },
@@ -163,12 +173,12 @@ export default async function RootLayout({
     "order": 0
   },
   {
-    "slug": "list-table",
+    "slug": "lists-and-tables",
     "title": "Lists and tables",
     "description": "Present structured information using lists or tables.",
     "date": "2025-01-15",
     "category": "Components",
-    "path": "list-table.mdx",
+    "path": "lists-and-tables.mdx",
     "categoryOrder": 1,
     "order": 2
   },
@@ -201,16 +211,6 @@ export default async function RootLayout({
     "path": "tabs.mdx",
     "categoryOrder": 1,
     "order": 5
-  },
-  {
-    "slug": "text",
-    "title": "Headers and Text",
-    "description": "Learn how to structure and style your content with headers, formatting, and links.",
-    "date": "2025-01-15",
-    "category": "Components",
-    "path": "text.mdx",
-    "categoryOrder": 1,
-    "order": 1
   },
   {
     "slug": "theme",
