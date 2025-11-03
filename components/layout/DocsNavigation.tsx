@@ -41,6 +41,7 @@ const NavButton = styled(Link)<{ theme: Theme }>`
   &[data-direction="next"] {
     align-items: flex-end;
     margin-left: auto;
+    text-align: right;
   }
 `;
 
@@ -59,6 +60,10 @@ const NavTitle = styled.span<{ theme: Theme }>`
   color: ${({ theme }) => theme.colors.dark};
   font-weight: 600;
   margin: 0 0 4px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 `;
 
 const Spacer = styled.div`
@@ -152,4 +157,3 @@ export function DocsNavigation({ result }: DocsNavigationProps) {
     </NavigationWrapper>
   );
 }
-
