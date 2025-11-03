@@ -63,7 +63,6 @@ const NavTitle = styled.span<{ theme: Theme }>`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 100%;
 `;
 
 const Spacer = styled.div`
@@ -90,7 +89,7 @@ interface DocsNavigationProps {
   result: NavigationItem[];
 }
 
-export function DocsNavigation({ result }: DocsNavigationProps) {
+function DocsNavigation({ result }: DocsNavigationProps) {
   const pathname = usePathname();
 
   // Flatten all pages from all categories into a single sorted array
@@ -157,3 +156,5 @@ export function DocsNavigation({ result }: DocsNavigationProps) {
     </NavigationWrapper>
   );
 }
+
+export { DocsNavigation };
