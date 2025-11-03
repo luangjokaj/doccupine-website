@@ -18,9 +18,10 @@ const customThemeJson = themeJson as typeof themeJson & {
 };
 
 const StyledHeader = styled.header<{ theme: Theme }>`
-  position: sticky;
+  position: fixed;
   top: 0;
   padding: 20px;
+  width: 100%;
   margin: 0;
   z-index: 1000;
 
