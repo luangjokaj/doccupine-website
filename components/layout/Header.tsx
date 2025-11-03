@@ -21,9 +21,9 @@ const StyledHeader = styled.header<{ theme: Theme }>`
   position: fixed;
   top: 0;
   padding: 20px;
-  width: 100%;
   margin: 0;
   z-index: 1000;
+  width: 100%;
 
   ${mq("lg")} {
     width: 320px;
