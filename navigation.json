@@ -87,6 +87,10 @@
       {
         "slug": "theme",
         "title": "Theme"
+      },
+      {
+        "slug": "deployment",
+        "title": "Deployment"
       }
     ]
   }
