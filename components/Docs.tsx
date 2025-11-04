@@ -1,7 +1,7 @@
 import { Flex } from "cherry-styled-components/src/lib";
 import {
   DocsContainer,
-  StyledMarkdownContainer
+  StyledMarkdownContainer,
 } from "@/components/layout/DocsComponents";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -48,10 +48,10 @@ function Docs({ content }: DocsProps) {
 
   return (
     <>
+      <CopyButton content={content} />
       <DocsContainer>
         <Flex $gap={20}>
           <StyledMarkdownContainer>
-            <CopyButton content={content} />
             {content && (
               <MDXRemote
                 source={content}
@@ -72,3 +72,4 @@ function Docs({ content }: DocsProps) {
 }
 
 export { Docs };
+

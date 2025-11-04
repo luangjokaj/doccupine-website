@@ -1,20 +1,33 @@
 "use client";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "@/components/layout/Icon";
 import { mq, Theme } from "@/app/theme";
+import { rgba } from "polished";
+import { resetButton } from "cherry-styled-components/src/lib";
 
 interface CopyButtonProps {
   content: string;
 }
 
-const StyledCopyWrapper = styled.div`
+const StyledCopyWrapper = styled.div<{ theme: Theme }>`
   position: relative;
-  padding-top: 70px;
+  border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
+  width: 100%;
+  padding: 70px 0 20px 0;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 
   ${mq("lg")} {
-    padding-top: 80px;
+    padding: 0 20px 20px 20px;
+    margin: auto auto 20px auto;
+    max-width: calc(100vw - 640px);
   }
+`;
+
+const StyledChildren = styled.div`
+  margin: auto 0;
 `;
 
 const StyledCopyButton = styled.button<{ theme: Theme; $copied: boolean }>`
@@ -25,7 +38,7 @@ const StyledCopyButton = styled.button<{ theme: Theme; $copied: boolean }>`
   color: ${({ theme, $copied }) =>
     $copied ? theme.colors.success : theme.colors.primary};
   border-radius: ${({ theme }) => theme.spacing.radius.xs};
-  padding: 4px 8px;
+  padding: 6px 8px;
   font-size: 12px;
   font-family: ${({ theme }) => theme.fonts.mono};
   cursor: pointer;
@@ -47,6 +60,71 @@ const StyledCopyButton = styled.button<{ theme: Theme; $copied: boolean }>`
 
   &:active {
     transform: scale(0.95);
+  }
+`;
+
+const StyledToggle = styled.button<{ theme: Theme; $hidden?: boolean }>`
+  ${resetButton}
+  width: 56px;
+  height: 32px;
+  border-radius: 30px;
+  display: flex;
+  position: relative;
+  margin: auto 0;
+  transform: scale(1);
+  background: ${({ theme }) => theme.colors.light};
+  border: solid 1px ${({ theme }) => theme.colors.grayLight};
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.2)};
+    transition: all 0.3s ease;
+    z-index: 1;
+    ${({ theme }) =>
+      theme.isDark &&
+      css`
+        transform: translateX(27px);
+      `}
+  }
+
+  & svg {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin: auto;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  & .lucide-eye {
+    transform: translateX(1px);
+  }
+
+  & svg[stroke] {
+    stroke: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+      color: ${({ theme }) =>
+        theme.isDark ? theme.colors.primaryLight : theme.colors.primaryDark};
+      Toggle & svg[stroke] {
+        stroke: ${({ theme }) =>
+          theme.isDark ? theme.colors.primaryLight : theme.colors.primaryDark};
+      }
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 `;
 
@@ -78,8 +156,16 @@ function CopyButton({ content }: CopyButtonProps) {
           </>
         )}
       </StyledCopyButton>
+      <StyledChildren>
+        {" "}
+        <StyledToggle onClick={async () => {}} aria-label="Toggle Theme">
+          <Icon name="Eye" />
+          <Icon name="CodeXml" />
+        </StyledToggle>
+      </StyledChildren>
     </StyledCopyWrapper>
   );
 }
 
 export { CopyButton };
+

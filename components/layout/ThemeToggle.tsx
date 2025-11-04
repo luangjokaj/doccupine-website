@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Theme, resetButton } from "cherry-styled-components/src/lib";
 import styled, { css, useTheme } from "styled-components";
 import { useRouter } from "next/navigation";
@@ -113,3 +112,4 @@ function ToggleThemeLoading() {
 }
 
 export { ToggleTheme, ToggleThemeLoading };
+
