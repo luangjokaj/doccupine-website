@@ -73,4 +73,3 @@ function Docs({ content }: DocsProps) {
 }
 
 export { Docs };
-
