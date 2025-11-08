@@ -4,29 +4,30 @@ import styled, { css } from "styled-components";
 import { Icon } from "@/components/layout/Icon";
 import { mq, Theme } from "@/app/theme";
 import { rgba } from "polished";
-import { resetButton } from "cherry-styled-components/src/lib";
+import { resetButton, Textarea } from "cherry-styled-components/src/lib";
 
-interface CopyButtonProps {
+interface ActionBarProps {
+  children: React.ReactNode;
   content: string;
 }
 
-const StyledCopyWrapper = styled.div<{ theme: Theme }>`
-  position: relative;
+const StyledActionBar = styled.div<{ theme: Theme }>`
+  position: absolute;
   border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
-  width: 100%;
+  left: 0;
   padding: 70px 0 20px 0;
-  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 
   ${mq("lg")} {
+    width: calc(100% + 20px);
     padding: 0 20px 20px 20px;
-    margin: auto auto 20px auto;
-    max-width: calc(100vw - 640px);
+    margin: 0 -10px;
   }
 `;
 
-const StyledChildren = styled.div`
+const StyledActionBarContent = styled.div`
   margin: auto 0;
 `;
 
@@ -63,7 +64,7 @@ const StyledCopyButton = styled.button<{ theme: Theme; $copied: boolean }>`
   }
 `;
 
-const StyledToggle = styled.button<{ theme: Theme; $hidden?: boolean }>`
+const StyledToggle = styled.button<{ theme: Theme; $isActive?: boolean }>`
   ${resetButton}
   width: 56px;
   height: 32px;
@@ -86,10 +87,10 @@ const StyledToggle = styled.button<{ theme: Theme; $hidden?: boolean }>`
     background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.2)};
     transition: all 0.3s ease;
     z-index: 1;
-    ${({ theme }) =>
-      theme.isDark &&
+    ${({ $isActive }) =>
+      !$isActive &&
       css`
-        transform: translateX(27px);
+        transform: translateX(24px);
       `}
   }
 
@@ -105,6 +106,10 @@ const StyledToggle = styled.button<{ theme: Theme; $hidden?: boolean }>`
 
   & .lucide-eye {
     transform: translateX(1px);
+  }
+
+  & .lucide-code-xml {
+    transform: translateX(-1px);
   }
 
   & svg[stroke] {
@@ -128,7 +133,22 @@ const StyledToggle = styled.button<{ theme: Theme; $hidden?: boolean }>`
   }
 `;
 
-function CopyButton({ content }: CopyButtonProps) {
+const StyledContent = styled.div`
+  padding-top: 140px;
+
+  ${mq("md")} {
+    padding-top: 70px;
+  }
+
+  & textarea {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+  }
+`;
+
+function ActionBar({ children, content }: ActionBarProps) {
+  const [isView, setIsView] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const handleCopyContent = async () => {
@@ -142,30 +162,41 @@ function CopyButton({ content }: CopyButtonProps) {
   };
 
   return (
-    <StyledCopyWrapper>
-      <StyledCopyButton onClick={handleCopyContent} $copied={copied}>
-        {copied ? (
-          <>
-            <Icon name="check" size={12} />
-            <span>Copied!</span>
-          </>
-        ) : (
-          <>
-            <Icon name="copy" size={12} />
-            <span>Copy Content</span>
-          </>
-        )}
-      </StyledCopyButton>
-      <StyledChildren>
-        {" "}
-        <StyledToggle onClick={async () => {}} aria-label="Toggle Theme">
-          <Icon name="Eye" />
-          <Icon name="CodeXml" />
-        </StyledToggle>
-      </StyledChildren>
-    </StyledCopyWrapper>
+    <>
+      <StyledActionBar>
+        <StyledCopyButton onClick={handleCopyContent} $copied={copied}>
+          {copied ? (
+            <>
+              <Icon name="check" size={12} />
+              <span>Copied!</span>
+            </>
+          ) : (
+            <>
+              <Icon name="copy" size={12} />
+              <span>Copy Content</span>
+            </>
+          )}
+        </StyledCopyButton>
+        <StyledActionBarContent>
+          {" "}
+          <StyledToggle
+            onClick={() => setIsView(!isView)}
+            aria-label="Toggle Theme"
+            $isActive={isView}
+          >
+            <Icon name="Eye" />
+            <Icon name="CodeXml" />
+          </StyledToggle>
+        </StyledActionBarContent>
+      </StyledActionBar>
+      {isView && <StyledContent>{children}</StyledContent>}
+      {!isView && (
+        <StyledContent>
+          <Textarea defaultValue={content} $fullWidth />
+        </StyledContent>
+      )}
+    </>
   );
 }
 
-export { CopyButton };
-
+export { ActionBar };
