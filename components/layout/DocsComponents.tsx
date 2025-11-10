@@ -402,4 +402,3 @@ function DocsContainer({ children }: DocsProps) {
 }
 
 export { DocsWrapper, DocsSidebar, DocsContainer };
-
