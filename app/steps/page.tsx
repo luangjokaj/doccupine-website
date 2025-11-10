@@ -2,8 +2,7 @@ import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
 import config from "@/config.json";
 
-const content = `
-# Steps
+const content = `# Steps
 Guide readers step-by-step using the Steps component.
 
 The Steps component is perfect for organizing procedures or workflows in a clear sequence. Include as many individual steps as necessary to outline your process.
