@@ -1,7 +1,7 @@
 import { Flex } from "cherry-styled-components/src/lib";
 import {
   DocsContainer,
-  StyledMarkdownContainer,
+  StyledMarkdownContainer
 } from "@/components/layout/DocsComponents";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
