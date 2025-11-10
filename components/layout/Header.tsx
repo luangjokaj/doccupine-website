@@ -26,6 +26,7 @@ const StyledHeader = styled.header<{ theme: Theme }>`
   width: 100%;
 
   ${mq("lg")} {
+    border-right: solid 1px ${({ theme }) => theme.colors.grayLight};
     width: 320px;
   }
 
