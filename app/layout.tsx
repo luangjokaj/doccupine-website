@@ -11,7 +11,7 @@ import { DocsNavigation } from "@/components/layout/DocsNavigation";
 import { transformPagesToGroupedStructure } from "@/utils/orderNavItems";
 import navigation from "@/navigation.json";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Doccupine",
@@ -118,7 +118,7 @@ export default async function RootLayout({
     "category": "Configuration",
     "path": "deployment.mdx",
     "categoryOrder": 3,
-    "order": 4
+    "order": 5
   },
   {
     "slug": "fields",
@@ -129,6 +129,16 @@ export default async function RootLayout({
     "path": "fields.mdx",
     "categoryOrder": 1,
     "order": 10
+  },
+  {
+    "slug": "fonts",
+    "title": "Fonts",
+    "description": "Customize the documentation typography with a fonts.json file (Google Fonts or local custom fonts).",
+    "date": "2025-01-15",
+    "category": "Configuration",
+    "path": "fonts.mdx",
+    "categoryOrder": 3,
+    "order": 4
   },
   {
     "slug": "globals",
@@ -248,7 +258,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <StyledComponentsRegistry>
           <CherryThemeProvider theme={theme} themeDark={themeDark}>
             <Header />

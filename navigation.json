@@ -89,6 +89,10 @@
         "title": "Theme"
       },
       {
+        "slug": "fonts",
+        "title": "Fonts"
+      },
+      {
         "slug": "deployment",
         "title": "Deployment"
       }
