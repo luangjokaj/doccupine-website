@@ -1,0 +1,18 @@
+<svg width="340" height="202" viewBox="0 0 340 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect opacity="0.1" width="340" height="202" rx="20" fill="#93C5FD"/>
+<line x1="93.5" y1="2.81937e-08" x2="93.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="144.5" y1="2.81937e-08" x2="144.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="195.5" y1="2.81937e-08" x2="195.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="247.5" y1="2.81937e-08" x2="247.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="298.5" y1="2.81937e-08" x2="298.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="42.5" y1="2.81937e-08" x2="42.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="24.5" y2="24.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="49.5" y2="49.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="75.5" y2="75.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="100.5" y2="100.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="125.5" y2="125.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="151.5" y2="151.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="176.5" y2="176.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<path d="M114.583 129.467C113.89 129.062 113.288 128.519 112.815 127.872C112.341 127.224 112.006 126.486 111.831 125.703C111.656 124.92 111.644 124.109 111.796 123.322C111.949 122.534 112.262 121.786 112.716 121.125L165.216 45.1752C165.754 44.405 166.469 43.7761 167.302 43.3418C168.135 42.9075 169.06 42.6807 170 42.6807C170.939 42.6807 171.864 42.9075 172.697 43.3418C173.53 43.7761 174.245 44.405 174.783 45.1752L227.283 121.067C227.747 121.73 228.068 122.482 228.226 123.276C228.383 124.07 228.374 124.888 228.199 125.678C228.023 126.468 227.685 127.213 227.206 127.865C226.727 128.517 226.118 129.063 225.416 129.467L175.775 157.817C174.015 158.819 172.025 159.346 170 159.346C167.974 159.346 165.984 158.819 164.225 157.817L114.583 129.467Z" fill="#93C5FD" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M170 42.6665V159.333" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

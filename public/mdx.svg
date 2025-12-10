@@ -1,0 +1,18 @@
+<svg width="340" height="202" viewBox="0 0 340 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect opacity="0.1" width="340" height="202" rx="20" fill="#93C5FD"/>
+<line x1="93.5" y1="2.81937e-08" x2="93.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="144.5" y1="2.81937e-08" x2="144.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="195.5" y1="2.81937e-08" x2="195.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="247.5" y1="2.81937e-08" x2="247.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="298.5" y1="2.81937e-08" x2="298.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="42.5" y1="2.81937e-08" x2="42.5" y2="202" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="24.5" y2="24.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="49.5" y2="49.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="75.5" y2="75.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="100.5" y2="100.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="125.5" y2="125.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="151.5" y2="151.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<line x1="340" y1="176.5" y2="176.5" stroke="#93C5FD" stroke-dasharray="2 2"/>
+<path d="M117.5 136C115.953 136 114.469 135.385 113.375 134.291C112.281 133.198 111.667 131.714 111.667 130.167V54.3333C111.667 52.7862 112.281 51.3025 113.375 50.2085C114.469 49.1146 115.953 48.5 117.5 48.5H146.667C152.855 48.5 158.79 50.9583 163.166 55.3342C167.542 59.71 170 65.6449 170 71.8333C170 65.6449 172.458 59.71 176.834 55.3342C181.21 50.9583 187.145 48.5 193.333 48.5H222.5C224.047 48.5 225.531 49.1146 226.625 50.2085C227.719 51.3025 228.333 52.7862 228.333 54.3333V130.167C228.333 131.714 227.719 133.198 226.625 134.291C225.531 135.385 224.047 136 222.5 136H187.5C182.859 136 178.407 137.844 175.125 141.126C171.844 144.408 170 148.859 170 153.5C170 148.859 168.156 144.408 164.874 141.126C161.592 137.844 157.141 136 152.5 136H117.5Z" fill="#93C5FD" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M170 71.8335V153.5" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
