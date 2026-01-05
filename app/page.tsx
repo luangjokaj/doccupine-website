@@ -5,31 +5,6 @@ import config from "@/config.json";
 const indexContent = `# Welcome to Doccupine
 Using Doccupine, you simply create your documentation in MDX files with traditional Markdown syntax, Doccupine monitors your changes automatically generating a beautiful, modern documentation website.
 
-## Features
-
-<Columns cols={2}>
-  <Card>
-    <img src="/mdx.svg" alt="Markdown-based content" className="full-width" />
-    <Space $size={12} />
-    Markdown-based content
-  </Card>
-  <Card>
-    <img src="/structure.svg" alt="Built-in file structure" className="full-width" />
-    <Space $size={12} />
-    Built-in file structure
-  </Card>
-  <Card>
-    <img src="/live-reload.svg" alt="Live Preview & Auto-Update" className="full-width" />
-    <Space $size={12} />
-    Live Preview & Auto-Update
-  </Card>
-  <Card>
-    <img src="/deployment.svg" alt="Easy Deployment" className="full-width" />
-    <Space $size={12} />
-    Easy Deployment
-  </Card>
-</Columns>
-
 ## Getting Started
 
 To get started with Doccupine, make sure you have [Node.js](https://nodejs.org) and npm installed on your machine. Then, follow these steps:
