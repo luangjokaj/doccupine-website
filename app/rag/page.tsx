@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import React, { useState } from "react";
 
 type Source = { id: string; path: string; score: number };
 
@@ -12,13 +11,13 @@ type ApiResponse = {
 };
 
 export default function RagPage() {
-  const [question, setQuestion] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-  const [answer, setAnswer] = React.useState<string>("");
-  const [sources, setSources] = React.useState<Source[]>([]);
-  const [chunkCount, setChunkCount] = React.useState<number | null>(null);
-  const [refresh, setRefresh] = React.useState(false);
+  const [question, setQuestion] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [answer, setAnswer] = useState<string>("");
+  const [sources, setSources] = useState<Source[]>([]);
+  const [chunkCount, setChunkCount] = useState<number | null>(null);
+  const [refresh, setRefresh] = useState(false);
 
   async function ask(e: React.FormEvent) {
     e.preventDefault();
@@ -39,7 +38,10 @@ export default function RagPage() {
       }
       let content = "";
       if (typeof data.answer === "string") content = data.answer;
-      else if (Array.isArray(data.answer)) content = data.answer.map((p: any) => (typeof p === "string" ? p : p?.text || "")).join("\n");
+      else if (Array.isArray(data.answer))
+        content = data.answer
+          .map((p: any) => (typeof p === "string" ? p : p?.text || ""))
+          .join("\n");
       else content = String(data.answer ?? "");
 
       setAnswer(content);
@@ -55,22 +57,43 @@ export default function RagPage() {
   return (
     <div style={{ maxWidth: 900, margin: "40px auto", padding: 20 }}>
       <h1>RAG over app/</h1>
-      <p>Ask questions about the documentation and code inside the <code>app/</code> directory.</p>
+      <p>
+        Ask questions about the documentation and code inside the{" "}
+        <code>app/</code> directory.
+      </p>
 
-      <form onSubmit={ask} style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 16 }}>
+      <form
+        onSubmit={ask}
+        style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 16 }}
+      >
         <input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Type your question..."
-          style={{ flex: 1, padding: 10, border: "1px solid #ccc", borderRadius: 8 }}
+          style={{
+            flex: 1,
+            padding: 10,
+            border: "1px solid #ccc",
+            borderRadius: 8,
+          }}
         />
-        <button type="submit" disabled={loading || !question.trim()} style={{ padding: "10px 14px" }}>
+        <button
+          type="submit"
+          disabled={loading || !question.trim()}
+          style={{ padding: "10px 14px" }}
+        >
           {loading ? "Asking..." : "Ask"}
         </button>
       </form>
 
-      <label style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
-        <input type="checkbox" checked={refresh} onChange={(e) => setRefresh(e.target.checked)} />
+      <label
+        style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}
+      >
+        <input
+          type="checkbox"
+          checked={refresh}
+          onChange={(e) => setRefresh(e.target.checked)}
+        />
         Rebuild index (may take time)
       </label>
 
@@ -81,13 +104,24 @@ export default function RagPage() {
       )}
 
       {chunkCount !== null && (
-        <div style={{ marginTop: 8, color: "#555" }}>Indexed chunks: {chunkCount}</div>
+        <div style={{ marginTop: 8, color: "#555" }}>
+          Indexed chunks: {chunkCount}
+        </div>
       )}
 
       {answer && (
         <div style={{ marginTop: 24 }}>
           <h2>Answer</h2>
-          <pre style={{ whiteSpace: "pre-wrap", background: "#f6f8fa", padding: 16, borderRadius: 8 }}>{answer}</pre>
+          <pre
+            style={{
+              whiteSpace: "pre-wrap",
+              background: "#f6f8fa",
+              padding: 16,
+              borderRadius: 8,
+            }}
+          >
+            {answer}
+          </pre>
         </div>
       )}
 
