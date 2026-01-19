@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { Button, Input } from "cherry-styled-components/src/lib";
 import { Theme } from "@/app/theme";
@@ -69,6 +69,11 @@ function Chat() {
   const [answer, setAnswer] = useState<Answer[]>([]);
   const [sources, setSources] = useState<Source[]>([]);
   const [chunkCount, setChunkCount] = useState<number | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [answer]);
 
   async function ask(e: React.FormEvent) {
     if (question.trim() === "") return;
@@ -142,6 +147,7 @@ function Chat() {
               {a.text}
             </StyledAnswer>
           ))}
+        <div ref={endRef} />
       </StyledChat>
     </>
   );
