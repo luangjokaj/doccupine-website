@@ -1,13 +1,14 @@
 import { Flex } from "cherry-styled-components/src/lib";
 import {
   DocsContainer,
-  StyledMarkdownContainer
+  StyledMarkdownContainer,
 } from "@/components/layout/DocsComponents";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "@/components/MDXComponents";
 import { DocsSideBar } from "@/components/DocsSideBar";
 import { ActionBar } from "@/components/layout/ActionBar";
+import { Chat } from "@/components/Chat";
 
 interface DocsProps {
   content: string;
@@ -48,6 +49,7 @@ function Docs({ content }: DocsProps) {
 
   return (
     <>
+      <Chat />
       <DocsContainer>
         <ActionBar content={content}>
           <Flex $gap={20}>
@@ -73,3 +75,4 @@ function Docs({ content }: DocsProps) {
 }
 
 export { Docs };
+
