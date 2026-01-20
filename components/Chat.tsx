@@ -2,8 +2,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { Button, Input } from "cherry-styled-components/src/lib";
-import { Theme } from "@/app/theme";
 import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import { Theme } from "@/app/theme";
+import { useMDXComponents } from "@/components/MDXComponents";
 
 const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   margin: 0;
@@ -96,14 +101,14 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
   }
 `;
 
-const StyledAnswer = styled.pre<{ theme: Theme; $isAnswer: boolean }>`
-  white-space: pre-wrap;
+const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   overflow-x: auto;
   background: ${({ theme }) => theme.colors.grayLight};
   padding: 16px;
   border-radius: 8px;
   margin: 20px 0;
   width: 100%;
+  white-space: pre-wrap;
 
   ${({ $isAnswer }) =>
     $isAnswer &&
@@ -112,6 +117,59 @@ const StyledAnswer = styled.pre<{ theme: Theme; $isAnswer: boolean }>`
       color: ${({ theme }) =>
         theme.isDark ? theme.colors.dark : theme.colors.light};
     `}
+
+  & > * {
+    margin: 0;
+    white-space: normal;
+  }
+
+  & > * + * {
+    margin-top: 1em;
+  }
+
+  & code {
+    background: ${({ theme }) =>
+      theme.isDark ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.2)"};
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  & pre {
+    background: ${({ theme }) =>
+      theme.isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.3)"};
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+
+  & pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  & ul,
+  & ol {
+    padding-left: 1.5em;
+  }
+
+  & li {
+    margin: 0.5em 0;
+  }
+
+  & p {
+    margin: 0.5em 0;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
 `;
 
 const StyledChatWrapper = styled.div<{ theme: Theme; $isVisible: boolean }>`
@@ -153,7 +211,11 @@ const StyledChatCloseButton = styled.button<{ theme: Theme }>`
 `;
 
 type Source = { id: string; path: string; score: number };
-type Answer = { text: string; answer?: boolean };
+type Answer = {
+  text: string;
+  answer?: boolean;
+  mdx?: MDXRemoteSerializeResult;
+};
 
 type ApiResponse = {
   answer?: string | any;
@@ -170,6 +232,7 @@ function Chat() {
   const [sources, setSources] = useState<Source[]>([]);
   const [chunkCount, setChunkCount] = useState<number | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
+  const mdxComponents = useMDXComponents({});
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -217,16 +280,34 @@ function Chat() {
           .join("\n");
       else content = String(data.answer ?? "");
 
+      // Serialize the markdown content to MDX
+      let mdxSource: MDXRemoteSerializeResult | null = null;
+      try {
+        mdxSource = await serialize(content, {
+          parseFrontmatter: false,
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeHighlight],
+            format: "mdx",
+            development: false,
+          },
+        });
+      } catch (mdxError: any) {
+        console.error("MDX serialization error:", mdxError);
+        // If MDX fails, we'll fall back to plain text rendering
+        mdxSource = null;
+      }
+
       const mergedAnswes =
         answer.length > 0
           ? [
               ...answer,
               { text: question, answer: false },
-              { text: content, answer: true },
+              { text: content, answer: true, mdx: mdxSource || undefined },
             ]
           : [
               { text: question, answer: false },
-              { text: content, answer: true },
+              { text: content, answer: true, mdx: mdxSource || undefined },
             ];
 
       setAnswer(mergedAnswes);
@@ -268,7 +349,11 @@ function Chat() {
           {answer &&
             answer.map((a, i) => (
               <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
-                {a.text}
+                {a.answer && a.mdx ? (
+                  <MDXRemote {...a.mdx} components={mdxComponents} />
+                ) : (
+                  a.text
+                )}
               </StyledAnswer>
             ))}
           <div ref={endRef} />
