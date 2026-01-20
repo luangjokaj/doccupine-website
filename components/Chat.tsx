@@ -1,30 +1,72 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Button, Input } from "cherry-styled-components/src/lib";
 import { Theme } from "@/app/theme";
+import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
 
 const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   margin: 0;
-  padding: 0 20px;
   position: fixed;
-  background: ${({ theme }) => theme.colors.light};
   top: 0;
   right: 0;
   width: 319px;
-  height: 100vh;
+  height: calc(100vh - 90px);
   overflow-y: scroll;
   z-index: 1000;
-  display: none;
+  pointer-events: none;
+
+  ${({ $isVisible }) => $isVisible && `pointer-events: all;`}
+`;
+
+const loadingAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  background: ${({ theme }) => theme.colors.light};
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  width: 319px;
+  border-top: solid 1px ${({ theme }) => theme.colors.grayLight};
+  transition: all 0.3s ease;
+  transform: translateY(90px);
 
   ${({ $isVisible }) =>
     $isVisible &&
     css`
-      display: block;
+      transform: translateY(0);
     `}
+
+  & input {
+    width: 100%;
+  }
+
+  & .loading {
+    animation: ${loadingAnimation} 1s linear infinite;
+  }
+
+  & button {
+    &:disabled,
+    &:disabled:hover {
+      background: ${({ theme }) => theme.colors.primaryDark};
+      color: ${({ theme }) => theme.colors.light};
+    }
+  }
 `;
 
-const StyledChatForm = styled.form`
+const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -33,6 +75,25 @@ const StyledChatForm = styled.form`
   top: 11px;
   left: 50%;
   transform: translateX(-50%);
+  transition: all 0.3s ease;
+
+  ${({ $hide }) =>
+    $hide &&
+    css`
+      transform: translateX(-50%) translateY(-100px);
+    `}
+
+  & .loading {
+    animation: ${loadingAnimation} 1s linear infinite;
+  }
+
+  & button {
+    &:disabled,
+    &:disabled:hover {
+      background: ${({ theme }) => theme.colors.primaryDark};
+      color: ${({ theme }) => theme.colors.light};
+    }
+  }
 `;
 
 const StyledAnswer = styled.pre<{ theme: Theme; $isAnswer: boolean }>`
@@ -48,8 +109,47 @@ const StyledAnswer = styled.pre<{ theme: Theme; $isAnswer: boolean }>`
     $isAnswer &&
     css`
       background: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) => theme.colors.light};
+      color: ${({ theme }) =>
+        theme.isDark ? theme.colors.dark : theme.colors.light};
     `}
+`;
+
+const StyledChatWrapper = styled.div<{ theme: Theme; $isVisible: boolean }>`
+  min-height: 100%;
+  width: 100%;
+  padding: 0 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  transform: translateX(-100%);
+  background: ${({ theme }) => theme.colors.light};
+
+  ${({ $isVisible }) =>
+    $isVisible &&
+    css`
+      transform: translateX(0);
+    `}
+`;
+
+const StyledChatTitle = styled.div<{ theme: Theme }>`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  position: sticky;
+  margin: 0 -20px;
+  padding: 22px 20px;
+  min-height: 73px;
+  top: 0;
+  background: ${({ theme }) => theme.colors.light};
+  border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
+`;
+
+const StyledChatCloseButton = styled.button<{ theme: Theme }>`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  color: ${({ theme }) => theme.colors.dark};
 `;
 
 type Source = { id: string; path: string; score: number };
@@ -75,12 +175,29 @@ function Chat() {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [answer]);
 
+  useEffect(() => {
+    if (answer?.length > 0) {
+      const el = document.getElementById(
+        "chat-bottom-input",
+      ) as HTMLInputElement | null;
+      el?.focus();
+    }
+  }, [answer]);
+
   async function ask(e: React.FormEvent) {
-    if (question.trim() === "") return;
+    if (loading || question.trim() === "") return;
+    setQuestion("");
     e.preventDefault();
     setLoading(true);
     setError(null);
     setSources([]);
+
+    const mergedQuestions =
+      answer.length > 0
+        ? [...answer, { text: question, answer: false }]
+        : [{ text: question, answer: false }];
+
+    setAnswer(mergedQuestions);
 
     try {
       const res = await fetch("/api/rag", {
@@ -124,30 +241,50 @@ function Chat() {
 
   return (
     <>
-      <StyledChatForm onSubmit={ask}>
+      <StyledChatFixedForm onSubmit={ask} $hide={answer?.length > 0}>
         <Input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask AI Assistant..."
         />
         <Button type="submit" disabled={loading}>
-          {loading ? "Asking..." : "Ask"}
+          {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
         </Button>
-      </StyledChatForm>
+      </StyledChatFixedForm>
 
       <StyledChat $isVisible={answer?.length > 0}>
-        {error && (
-          <div style={{ marginTop: 16, color: "#b00020" }}>
-            <strong>Error:</strong> {error}
-          </div>
-        )}
-        {answer &&
-          answer.map((a, i) => (
-            <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
-              {a.text}
-            </StyledAnswer>
-          ))}
-        <div ref={endRef} />
+        <StyledChatWrapper $isVisible={answer?.length > 0}>
+          <StyledChatTitle>
+            <h3>AI Assistant</h3>
+            <StyledChatCloseButton onClick={() => setAnswer([])}>
+              <X />
+            </StyledChatCloseButton>
+          </StyledChatTitle>
+          {error && (
+            <div style={{ marginTop: 16, color: "#b00020" }}>
+              <strong>Error:</strong> {error}
+            </div>
+          )}
+          {answer &&
+            answer.map((a, i) => (
+              <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
+                {a.text}
+              </StyledAnswer>
+            ))}
+          <div ref={endRef} />
+        </StyledChatWrapper>
+
+        <StyledChatForm onSubmit={ask} $isVisible={answer?.length > 0}>
+          <Input
+            id="chat-bottom-input"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask AI Assistant..."
+          />
+          <Button type="submit" disabled={loading}>
+            {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
+          </Button>
+        </StyledChatForm>
       </StyledChat>
     </>
   );
