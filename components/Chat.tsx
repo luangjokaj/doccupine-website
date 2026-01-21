@@ -109,6 +109,13 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
   transform: translateX(-50%);
   transition: all 0.3s ease;
 
+  & input {
+    &:hover,
+    &:focus {
+      width: 240px;
+    }
+  }
+
   ${({ $hide }) =>
     $hide &&
     css`
@@ -398,6 +405,7 @@ function Chat() {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask AI Assistant..."
+          className="chat-input"
         />
         <Button type="submit" disabled={loading}>
           {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
