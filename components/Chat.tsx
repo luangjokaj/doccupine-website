@@ -1,27 +1,33 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import { rgba } from "polished";
 import { Button, Input } from "cherry-styled-components/src/lib";
 import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { Theme } from "@/app/theme";
+import { mq, Theme } from "@/app/theme";
 import { useMDXComponents } from "@/components/MDXComponents";
+import { stylesLists } from "@/components/layout/SharedStyled";
 
 const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   margin: 0;
   position: fixed;
   top: 0;
   right: 0;
-  width: 319px;
+  width: 100%;
   height: calc(100vh - 90px);
   overflow-y: scroll;
   z-index: 1000;
   pointer-events: none;
 
   ${({ $isVisible }) => $isVisible && `pointer-events: all;`}
+
+  ${mq("lg")} {
+    width: 319px;
+  }
 `;
 
 const loadingAnimation = keyframes`
@@ -43,10 +49,14 @@ const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
   bottom: 0;
   right: 0;
   z-index: 1000;
-  width: 319px;
+  width: 100%;
   border-top: solid 1px ${({ theme }) => theme.colors.grayLight};
   transition: all 0.3s ease;
   transform: translateY(90px);
+
+  ${mq("lg")} {
+    width: 319px;
+  }
 
   ${({ $isVisible }) =>
     $isVisible &&
@@ -104,6 +114,7 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
 const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   overflow-x: auto;
   background: ${({ theme }) => theme.colors.grayLight};
+  color: ${({ theme }) => theme.colors.dark};
   padding: 16px;
   border-radius: 8px;
   margin: 20px 0;
@@ -118,47 +129,33 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
         theme.isDark ? theme.colors.dark : theme.colors.light};
     `}
 
-  & > * {
-    margin: 0;
-    white-space: normal;
+  & code:not([class]) {
+    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.5)};
+    color: ${({ theme }) =>
+      theme.isDark ? theme.colors.dark : theme.colors.light};
+    padding: 2px 4px;
+    border-radius: ${({ theme }) => theme.spacing.radius.xs};
   }
 
-  & > * + * {
-    margin-top: 1em;
-  }
-
-  & code {
-    background: ${({ theme }) =>
-      theme.isDark ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.2)"};
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
-
-  & pre {
-    background: ${({ theme }) =>
-      theme.isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.3)"};
-    padding: 12px;
-    border-radius: 6px;
-    overflow-x: auto;
-  }
-
-  & pre code {
-    background: transparent;
-    padding: 0;
-  }
+  ${stylesLists};
 
   & ul,
   & ol {
-    padding-left: 1.5em;
+    margin: -20px 0;
+
+    & li {
+      margin: -10px 0;
+      color: ${({ theme }) =>
+        theme.isDark ? theme.colors.dark : theme.colors.light};
+    }
   }
 
-  & li {
-    margin: 0.5em 0;
-  }
-
-  & p {
-    margin: 0.5em 0;
+  & ul {
+    & li {
+      &::before {
+        background: ${({ theme }) => theme.colors.primaryLight};
+      }
+    }
   }
 
   & h1,
@@ -167,8 +164,13 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   & h4,
   & h5,
   & h6 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
+    margin: 0;
+    padding: 0;
+  }
+
+  & > * {
+    color: ${({ theme }) =>
+      theme.isDark ? theme.colors.dark : theme.colors.light};
   }
 `;
 
@@ -199,6 +201,7 @@ const StyledChatTitle = styled.div<{ theme: Theme }>`
   top: 0;
   background: ${({ theme }) => theme.colors.light};
   border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
+  z-index: 1000;
 `;
 
 const StyledChatCloseButton = styled.button<{ theme: Theme }>`
@@ -288,7 +291,7 @@ function Chat() {
           mdxOptions: {
             remarkPlugins: [remarkGfm],
             rehypePlugins: [rehypeHighlight],
-            format: "mdx",
+            format: "md", // Use markdown format to handle nested code blocks better
             development: false,
           },
         });
@@ -365,6 +368,7 @@ function Chat() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask AI Assistant..."
+            $fullWidth
           />
           <Button type="submit" disabled={loading}>
             {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}

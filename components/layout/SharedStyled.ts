@@ -770,3 +770,75 @@ export const StyledImage = styled.img<{ theme: Theme; $maxWidth?: string }>`
   height: auto;
   border: 1px solid ${({ theme }) => theme.colors.grayLight};
 `;
+
+export const stylesLists = css<{ theme: Theme }>`
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    & li {
+      text-indent: 0;
+      display: block;
+      position: relative;
+      padding: 0 0 0 15px;
+      margin: 0;
+      ${({ theme }) => styledText(theme)};
+      min-height: 23px;
+
+      & .code-wrapper {
+        margin: 10px 0;
+      }
+
+      $mq: "lg" {
+        min-height: 27px;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: ${({ theme }) => theme.colors.primary};
+        position: absolute;
+        top: 8px;
+        left: 2px;
+
+        ${mq("lg")} {
+          top: 10px;
+        }
+      }
+    }
+  }
+
+  & ol {
+    padding: 0;
+    margin: 0;
+
+    & ul {
+      padding-left: 15px;
+    }
+
+    & > li {
+      position: relative;
+      padding: 0;
+      counter-increment: item;
+      margin: 0;
+      ${({ theme }) => styledText(theme)};
+
+      & .code-wrapper {
+        margin: 10px 0;
+      }
+
+      &::before {
+        content: counter(item) ".";
+        display: inline-block;
+        margin: 0 4px 0 0;
+        font-weight: 700;
+        color: ${({ theme }) => theme.colors.primary};
+        min-width: max-content;
+      }
+    }
+  }
+`;
