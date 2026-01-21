@@ -111,6 +111,43 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
   }
 `;
 
+const StyledError = styled.div<{ theme: Theme }>`
+  overflow-x: auto;
+  background: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) =>
+    theme.isDark ? theme.colors.dark : theme.colors.light};
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 100%;
+`;
+
+const StyledLoading = styled.div<{ theme: Theme }>`
+  overflow-x: auto;
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) =>
+    theme.isDark ? theme.colors.dark : theme.colors.light};
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 100%;
+  animation: ${({ theme }) => keyframes`
+    0% {
+      box-shadow: 0 0 0 0px ${theme.colors.primaryLight};
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 5px ${theme.colors.primaryLight};
+      scale: 0.95;
+    }
+    100% {
+      box-shadow: 0 0 0 0px ${theme.colors.primaryLight};
+      transform: scale(1);
+    }
+  `}
+    1s ease infinite;
+`;
+
 const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   overflow-x: auto;
   background: ${({ theme }) => theme.colors.grayLight};
@@ -125,8 +162,6 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
     $isAnswer &&
     css`
       background: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) =>
-        theme.isDark ? theme.colors.dark : theme.colors.light};
     `}
 
   & code:not([class]) {
@@ -196,8 +231,8 @@ const StyledChatTitle = styled.div<{ theme: Theme }>`
   justify-content: space-between;
   position: sticky;
   margin: 0 -20px;
-  padding: 22px 20px;
-  min-height: 73px;
+  padding: 25px 20px;
+  height: 73px;
   top: 0;
   background: ${({ theme }) => theme.colors.light};
   border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
@@ -344,11 +379,6 @@ function Chat() {
               <X />
             </StyledChatCloseButton>
           </StyledChatTitle>
-          {error && (
-            <div style={{ marginTop: 16, color: "#b00020" }}>
-              <strong>Error:</strong> {error}
-            </div>
-          )}
           {answer &&
             answer.map((a, i) => (
               <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
@@ -359,6 +389,12 @@ function Chat() {
                 )}
               </StyledAnswer>
             ))}
+          {loading && <StyledLoading>Answering...</StyledLoading>}
+          {error && (
+            <StyledError>
+              <strong>Error:</strong> {error}
+            </StyledError>
+          )}
           <div ref={endRef} />
         </StyledChatWrapper>
 
@@ -370,7 +406,7 @@ function Chat() {
             placeholder="Ask AI Assistant..."
             $fullWidth
           />
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading || question.trim() === ""}>
             {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
           </Button>
         </StyledChatForm>
