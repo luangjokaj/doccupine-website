@@ -26,7 +26,12 @@ async function* walk(dir: string): AsyncGenerator<string> {
   for (const entry of entries) {
     const p = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === "node_modules" || entry.name === ".next" || entry.name === ".git") continue;
+      if (
+        entry.name === "node_modules" ||
+        entry.name === ".next" ||
+        entry.name === ".git"
+      )
+        continue;
       yield* walk(p);
     } else {
       const ext = path.extname(entry.name).toLowerCase();
@@ -105,7 +110,10 @@ async function buildIndex() {
         const buf = await fs.readFile(f, "utf8");
         const blocks = extractContentBlocks(buf);
         for (const b of blocks) {
-          const clean = b.replace(/\r\n/g, "\n").replace(/\n{3,}/g, "\n\n").slice(0, 200_000);
+          const clean = b
+            .replace(/\r\n/g, "\n")
+            .replace(/\n{3,}/g, "\n\n")
+            .slice(0, 200_000);
           const pieces = chunkText(clean);
           for (const piece of pieces) {
             docs.push({ path: f, chunk: piece });
@@ -149,7 +157,10 @@ export async function POST(req: Request) {
   try {
     const { question, refresh } = await req.json();
     if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json({ error: "Missing OPENAI_API_KEY in environment" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Missing OPENAI_API_KEY in environment" },
+        { status: 500 },
+      );
     }
 
     await ensureIndex(Boolean(refresh));
@@ -163,7 +174,10 @@ export async function POST(req: Request) {
       .slice(0, 6);
 
     const context = scored
-      .map(({ c, score }) => `File: ${path.relative(PROJECT_ROOT, c.path)}\nScore: ${score.toFixed(3)}\n----\n${c.text}`)
+      .map(
+        ({ c, score }) =>
+          `File: ${path.relative(PROJECT_ROOT, c.path)}\nScore: ${score.toFixed(3)}\n----\n${c.text}`,
+      )
       .join("\n\n================\n\n");
 
     const llm = new ChatOpenAI({ model: "gpt-4o-mini", temperature: 0 });
@@ -183,14 +197,24 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       answer: completion?.content,
-      sources: scored.map(({ c, score }) => ({ id: c.id, path: path.relative(PROJECT_ROOT, c.path), score })),
+      sources: scored.map(({ c, score }) => ({
+        id: c.id,
+        path: path.relative(PROJECT_ROOT, c.path),
+        score,
+      })),
       chunkCount: indexCache.chunks.length,
     });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Unknown error" }, { status: 500 });
+    return NextResponse.json(
+      { error: e?.message || "Unknown error" },
+      { status: 500 },
+    );
   }
 }
 
 export async function GET() {
-  return NextResponse.json({ ready: indexCache.ready, chunks: indexCache.chunks.length });
+  return NextResponse.json({
+    ready: indexCache.ready,
+    chunks: indexCache.chunks.length,
+  });
 }
