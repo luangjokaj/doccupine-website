@@ -182,6 +182,11 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
       margin: -10px 0;
       color: ${({ theme }) =>
         theme.isDark ? theme.colors.dark : theme.colors.light};
+
+      & p {
+        color: ${({ theme }) =>
+          theme.isDark ? theme.colors.dark : theme.colors.light};
+      }
     }
   }
 
@@ -189,6 +194,27 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
     & li {
       &::before {
         background: ${({ theme }) => theme.colors.primaryLight};
+      }
+    }
+  }
+
+  & ol {
+    & li {
+      padding-left: 20px;
+
+      & p {
+        margin: -20px 0;
+      }
+
+      & .hljs {
+        margin: 0 0 -20px;
+      }
+
+      &::before {
+        position: absolute;
+        top: 7px;
+        left: 0;
+        color: ${({ theme }) => theme.colors.primaryLight};
       }
     }
   }
