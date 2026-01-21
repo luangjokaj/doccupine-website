@@ -1,8 +1,14 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled, { css, keyframes } from "styled-components";
 import { rgba } from "polished";
-import { Button, Input } from "cherry-styled-components/src/lib";
+import { Button, Input, styledText } from "cherry-styled-components/src/lib";
 import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -20,13 +26,23 @@ const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   width: 100%;
   height: calc(100vh - 90px);
   overflow-y: scroll;
+  overflow-x: hidden;
   z-index: 1000;
-  pointer-events: none;
+  width: 100%;
+  padding: 0 20px;
+  transition: all 0.3s ease;
+  transform: translateX(0);
+  background: ${({ theme }) => theme.colors.light};
+  border-left: solid 1px ${({ theme }) => theme.colors.grayLight};
 
-  ${({ $isVisible }) => $isVisible && `pointer-events: all;`}
+  ${({ $isVisible }) =>
+    !$isVisible &&
+    css`
+      transform: translateX(420px);
+    `}
 
   ${mq("lg")} {
-    width: 319px;
+    width: 420px;
   }
 `;
 
@@ -51,17 +67,18 @@ const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
   z-index: 1000;
   width: 100%;
   border-top: solid 1px ${({ theme }) => theme.colors.grayLight};
+  border-left: solid 1px ${({ theme }) => theme.colors.grayLight};
   transition: all 0.3s ease;
-  transform: translateY(90px);
+  transform: translateX(420px);
 
   ${mq("lg")} {
-    width: 319px;
+    width: 420px;
   }
 
   ${({ $isVisible }) =>
     $isVisible &&
     css`
-      transform: translateY(0);
+      transform: translateX(0);
     `}
 
   & input {
@@ -158,6 +175,10 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   width: 100%;
   white-space: pre-wrap;
 
+  & p {
+    ${({ theme }) => styledText(theme)};
+  }
+
   ${({ $isAnswer }) =>
     $isAnswer &&
     css`
@@ -235,22 +256,6 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   }
 `;
 
-const StyledChatWrapper = styled.div<{ theme: Theme; $isVisible: boolean }>`
-  min-height: 100%;
-  width: 100%;
-  padding: 0 20px;
-  position: relative;
-  transition: all 0.3s ease;
-  transform: translateX(-100%);
-  background: ${({ theme }) => theme.colors.light};
-
-  ${({ $isVisible }) =>
-    $isVisible &&
-    css`
-      transform: translateX(0);
-    `}
-`;
-
 const StyledChatTitle = styled.div<{ theme: Theme }>`
   display: flex;
   flex-wrap: nowrap;
@@ -293,10 +298,9 @@ function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [answer, setAnswer] = useState<Answer[]>([]);
-  const [sources, setSources] = useState<Source[]>([]);
-  const [chunkCount, setChunkCount] = useState<number | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
   const mdxComponents = useMDXComponents({});
+  const { setIsOpen } = useContext(ChatContext);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -314,10 +318,10 @@ function Chat() {
   async function ask(e: React.FormEvent) {
     if (loading || question.trim() === "") return;
     setQuestion("");
+    setIsOpen(true);
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setSources([]);
 
     const mergedQuestions =
       answer.length > 0
@@ -344,7 +348,6 @@ function Chat() {
           .join("\n");
       else content = String(data.answer ?? "");
 
-      // Serialize the markdown content to MDX
       let mdxSource: MDXRemoteSerializeResult | null = null;
       try {
         mdxSource = await serialize(content, {
@@ -352,13 +355,12 @@ function Chat() {
           mdxOptions: {
             remarkPlugins: [remarkGfm],
             rehypePlugins: [rehypeHighlight],
-            format: "md", // Use markdown format to handle nested code blocks better
+            format: "md",
             development: false,
           },
         });
       } catch (mdxError: any) {
         console.error("MDX serialization error:", mdxError);
-        // If MDX fails, we'll fall back to plain text rendering
         mdxSource = null;
       }
 
@@ -375,8 +377,6 @@ function Chat() {
             ];
 
       setAnswer(mergedAnswes);
-      setSources(data.sources || []);
-      setChunkCount(data.chunkCount ?? null);
     } catch (err: any) {
       setError(err.message || "Unknown error");
     } finally {
@@ -398,47 +398,77 @@ function Chat() {
       </StyledChatFixedForm>
 
       <StyledChat $isVisible={answer?.length > 0}>
-        <StyledChatWrapper $isVisible={answer?.length > 0}>
-          <StyledChatTitle>
-            <h3>AI Assistant</h3>
-            <StyledChatCloseButton onClick={() => setAnswer([])}>
-              <X />
-            </StyledChatCloseButton>
-          </StyledChatTitle>
-          {answer &&
-            answer.map((a, i) => (
-              <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
-                {a.answer && a.mdx ? (
-                  <MDXRemote {...a.mdx} components={mdxComponents} />
-                ) : (
-                  a.text
-                )}
-              </StyledAnswer>
-            ))}
-          {loading && <StyledLoading>Answering...</StyledLoading>}
-          {error && (
-            <StyledError>
-              <strong>Error:</strong> {error}
-            </StyledError>
-          )}
-          <div ref={endRef} />
-        </StyledChatWrapper>
-
-        <StyledChatForm onSubmit={ask} $isVisible={answer?.length > 0}>
-          <Input
-            id="chat-bottom-input"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask AI Assistant..."
-            $fullWidth
-          />
-          <Button type="submit" disabled={loading || question.trim() === ""}>
-            {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
-          </Button>
-        </StyledChatForm>
+        <StyledChatTitle>
+          <h3>AI Assistant</h3>
+          <StyledChatCloseButton
+            onClick={() => {
+              setAnswer([]);
+              setIsOpen(false);
+            }}
+          >
+            <X />
+          </StyledChatCloseButton>
+        </StyledChatTitle>
+        {answer &&
+          answer.map((a, i) => (
+            <StyledAnswer key={i} $isAnswer={a.answer ?? false}>
+              {a.answer && a.mdx ? (
+                <MDXRemote {...a.mdx} components={mdxComponents} />
+              ) : (
+                a.text
+              )}
+            </StyledAnswer>
+          ))}
+        {loading && <StyledLoading>Answering...</StyledLoading>}
+        {error && (
+          <StyledError>
+            <strong>Error:</strong> {error}
+          </StyledError>
+        )}
+        <div ref={endRef} />
       </StyledChat>
+
+      <StyledChatForm onSubmit={ask} $isVisible={answer?.length > 0}>
+        <Input
+          id="chat-bottom-input"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="Ask AI Assistant..."
+          $fullWidth
+        />
+        <Button type="submit" disabled={loading || question.trim() === ""}>
+          {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
+        </Button>
+      </StyledChatForm>
     </>
   );
 }
 
-export { Chat };
+const ChatContext = createContext<{
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}>({
+  isOpen: false,
+  setIsOpen: () => {},
+});
+
+interface ChatContextProviderProps {
+  children: React.ReactNode;
+}
+
+const ChtProvider = ({ children }: ChatContextProviderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <ChatContext.Provider
+      value={{
+        isOpen,
+        setIsOpen,
+      }}
+    >
+      {children}
+    </ChatContext.Provider>
+  );
+};
+
+export { Chat, ChtProvider, ChatContext };

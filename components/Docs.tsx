@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "@/components/MDXComponents";
 import { DocsSideBar } from "@/components/DocsSideBar";
 import { ActionBar } from "@/components/layout/ActionBar";
-import { Chat } from "@/components/Chat";
+import { ChatContext } from "@/components/Chat";
 
 interface DocsProps {
   content: string;
@@ -49,7 +49,6 @@ function Docs({ content }: DocsProps) {
 
   return (
     <>
-      <Chat />
       <DocsContainer>
         <ActionBar content={content}>
           <Flex $gap={20}>
@@ -75,4 +74,3 @@ function Docs({ content }: DocsProps) {
 }
 
 export { Docs };
-

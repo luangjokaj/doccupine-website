@@ -1,6 +1,6 @@
 "use client";
 import { darken, lighten, rgba } from "polished";
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import {
   resetButton,
@@ -10,7 +10,8 @@ import {
 } from "cherry-styled-components/src/lib";
 import Link from "next/link";
 import { mq, Theme } from "@/app/theme";
-import { stylesLists } from "./SharedStyled";
+import { stylesLists } from "@/components/layout/SharedStyled";
+import { ChatContext } from "@/components/Chat";
 
 interface DocsProps {
   children: React.ReactNode;
@@ -24,14 +25,21 @@ const StyledDocsSidebar = styled.div<{ theme: Theme }>`
   clear: both;
 `;
 
-const StyledDocsContainer = styled.div<{ theme: Theme }>`
+const StyledDocsContainer = styled.div<{ theme: Theme; $isChatOpen?: boolean }>`
   position: relative;
   padding: 20px 20px 100px 20px;
   width: 100%;
   ${({ theme }) => styledText(theme)};
+  transition: all 0.3s ease;
 
   ${mq("lg")} {
     padding: 20px 340px 80px 340px;
+
+    ${({ $isChatOpen }) =>
+      $isChatOpen &&
+      css`
+        padding: 20px 420px 80px 340px;
+      `}
   }
 
   & p {
@@ -331,8 +339,11 @@ function DocsSidebar({ children }: DocsProps) {
 }
 
 function DocsContainer({ children }: DocsProps) {
-  return <StyledDocsContainer>{children}</StyledDocsContainer>;
+  const { isOpen } = useContext(ChatContext);
+
+  return (
+    <StyledDocsContainer $isChatOpen={isOpen}>{children}</StyledDocsContainer>
+  );
 }
 
 export { DocsWrapper, DocsSidebar, DocsContainer };
-
