@@ -38,7 +38,7 @@ const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   ${({ $isVisible }) =>
     !$isVisible &&
     css`
-      transform: translateX(420px);
+      transform: translateX(100%);
     `}
 
   ${mq("lg")} {
@@ -69,7 +69,7 @@ const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
   border-top: solid 1px ${({ theme }) => theme.colors.grayLight};
   border-left: solid 1px ${({ theme }) => theme.colors.grayLight};
   transition: all 0.3s ease;
-  transform: translateX(420px);
+  transform: translateX(100%);
 
   ${mq("lg")} {
     width: 420px;
@@ -148,6 +148,7 @@ const StyledLoading = styled.div<{ theme: Theme }>`
   border-radius: 8px;
   margin: 20px 0;
   width: 100%;
+  ${({ theme }) => styledText(theme)};
   animation: ${({ theme }) => keyframes`
     0% {
       box-shadow: 0 0 0 0px ${theme.colors.primaryLight};
@@ -276,7 +277,13 @@ const StyledChatCloseButton = styled.button<{ theme: Theme }>`
   cursor: pointer;
   padding: 0;
   margin: 0;
-  color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.primary};
+
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ theme }) => theme.colors.primaryDark};
+    }
+  }
 `;
 
 type Source = { id: string; path: string; score: number };

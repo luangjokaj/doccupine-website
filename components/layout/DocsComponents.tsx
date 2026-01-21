@@ -257,7 +257,7 @@ export const StyledSidebarListItemLink = styled(Link)<Props>`
 export const StyleMobileBar = styled.button<Props>`
   ${resetButton};
   position: fixed;
-  z-index: 1000;
+  z-index: 999;
   bottom: 0;
   right: 20px;
   font-size: ${({ theme }) => theme.fontSizes.strong.lg};
