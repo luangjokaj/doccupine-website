@@ -163,10 +163,11 @@ const StyledError = styled.div<{ theme: Theme }>`
   background: ${({ theme }) => theme.colors.error};
   color: ${({ theme }) =>
     theme.isDark ? theme.colors.dark : theme.colors.light};
-  padding: 16px;
+  padding: 10px;
   border-radius: 8px;
   margin: 20px 0;
   width: 100%;
+  ${styledText};
 `;
 
 const loadingDotAnimation = keyframes`
