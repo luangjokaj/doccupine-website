@@ -331,7 +331,7 @@ function Chat() {
   const [answer, setAnswer] = useState<Answer[]>([]);
   const endRef = useRef<HTMLDivElement | null>(null);
   const mdxComponents = useMDXComponents({});
-  const { setIsOpen } = useContext(ChatContext);
+  const { isOpen, setIsOpen } = useContext(ChatContext);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -347,6 +347,7 @@ function Chat() {
   }, [answer]);
 
   async function ask(e: React.FormEvent) {
+    e.preventDefault();
     if (loading || question.trim() === "") return;
     setQuestion("");
     setIsOpen(true);
@@ -429,7 +430,7 @@ function Chat() {
         </Button>
       </StyledChatFixedForm>
 
-      <StyledChat $isVisible={answer?.length > 0}>
+      <StyledChat $isVisible={isOpen}>
         <StyledChatTitle>
           <h3>AI Assistant</h3>
           <StyledChatCloseButton
@@ -460,7 +461,7 @@ function Chat() {
         <div ref={endRef} />
       </StyledChat>
 
-      <StyledChatForm onSubmit={ask} $isVisible={answer?.length > 0}>
+      <StyledChatForm onSubmit={ask} $isVisible={isOpen}>
         <Input
           id="chat-bottom-input"
           value={question}
