@@ -8,7 +8,6 @@ import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "@/components/MDXComponents";
 import { DocsSideBar } from "@/components/DocsSideBar";
 import { ActionBar } from "@/components/layout/ActionBar";
-import { ChatContext } from "@/components/Chat";
 
 interface DocsProps {
   content: string;

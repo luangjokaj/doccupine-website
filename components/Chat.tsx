@@ -16,7 +16,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { mq, Theme } from "@/app/theme";
 import { useMDXComponents } from "@/components/MDXComponents";
-import { stylesLists } from "@/components/layout/SharedStyled";
+import { styledTable, stylesLists } from "@/components/layout/SharedStyled";
 
 const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   margin: 0;
@@ -202,6 +202,23 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   }
 
   ${stylesLists};
+  ${styledTable};
+
+  & table {
+    & th,
+    & td {
+      color: ${({ theme }) =>
+        theme.isDark ? theme.colors.dark : theme.colors.light};
+      border-bottom: solid 1px
+        ${({ theme }) =>
+          rgba(theme.isDark ? theme.colors.dark : theme.colors.light, 0.2)};
+    }
+
+    & td {
+      color: ${({ theme }) =>
+        rgba(theme.isDark ? theme.colors.dark : theme.colors.light, 0.8)};
+    }
+  }
 
   & ul,
   & ol {

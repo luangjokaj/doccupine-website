@@ -842,3 +842,33 @@ export const stylesLists = css<{ theme: Theme }>`
     }
   }
 `;
+
+export const styledTable = css<{ theme: Theme }>`
+  & table {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+
+    & tr {
+      margin: 0;
+      padding: 0;
+    }
+
+    & th {
+      border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
+      padding: 10px 0;
+      ${({ theme }) => styledSmall(theme)};
+      font-weight: 600;
+      color: ${({ theme }) => theme.colors.dark};
+    }
+
+    & td {
+      border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
+      padding: 10px 10px 10px 0;
+      color: ${({ theme }) => theme.colors.grayDark};
+      ${({ theme }) => styledSmall(theme)};
+    }
+  }
+`;

@@ -280,7 +280,7 @@ export default async function RootLayout({
           <CherryThemeProvider theme={theme} themeDark={themeDark}>
             <ChtProvider>
               <Header />
-              <Chat />
+              {process.env.OPENAI_API_KEY && <Chat />}
               <DocsWrapper>
                 <SideBar result={result.length ? result : defaultResults} />
                 {children}

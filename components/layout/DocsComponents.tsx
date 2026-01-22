@@ -10,7 +10,7 @@ import {
 } from "cherry-styled-components/src/lib";
 import Link from "next/link";
 import { mq, Theme } from "@/app/theme";
-import { stylesLists } from "@/components/layout/SharedStyled";
+import { styledTable, stylesLists } from "@/components/layout/SharedStyled";
 import { ChatContext } from "@/components/Chat";
 
 interface DocsProps {
@@ -51,6 +51,7 @@ const StyledDocsContainer = styled.div<{ theme: Theme; $isChatOpen?: boolean }>`
   }
 
   ${stylesLists};
+  ${styledTable};
 
   & img,
   & video,
@@ -64,34 +65,6 @@ const StyledDocsContainer = styled.div<{ theme: Theme; $isChatOpen?: boolean }>`
     color: ${({ theme }) => theme.colors.dark};
     padding: 2px 4px;
     border-radius: ${({ theme }) => theme.spacing.radius.xs};
-  }
-
-  & table {
-    margin: 0;
-    padding: 0;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: left;
-
-    & tr {
-      margin: 0;
-      padding: 0;
-    }
-
-    & th {
-      border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
-      padding: 10px 0;
-      ${({ theme }) => styledSmall(theme)};
-      font-weight: 600;
-      color: ${({ theme }) => theme.colors.dark};
-    }
-
-    & td {
-      border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
-      padding: 10px 10px 10px 0;
-      color: ${({ theme }) => theme.colors.grayDark};
-      ${({ theme }) => styledSmall(theme)};
-    }
   }
 
   & .lucide {
