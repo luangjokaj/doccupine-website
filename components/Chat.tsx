@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { rgba } from "polished";
-import { Button, Input } from "cherry-styled-components/src/lib";
+import { Button } from "cherry-styled-components/src/lib";
 import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -65,10 +65,271 @@ const loadingAnimation = keyframes`
   }
 `;
 
+const rotateGradient = keyframes`
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+`;
+
+const pulseGlow = keyframes`
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(16px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(22px);
+  }
+`;
+
+const sparkleFloat = keyframes`
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px) scale(1);
+  }
+`;
+
+const shimmer = keyframes`
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+`;
+
+const StyledRainbowInputWrapper = styled.div<{
+  theme: Theme;
+  $isActive: boolean;
+}>`
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  position: relative;
+  flex: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      #cc5555,
+      #d9a745,
+      #3ab0cc,
+      #cc7fc2,
+      #4380cc,
+      #4c1fa3,
+      #cc5555
+    );
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: ${rotateGradient} 3s linear infinite;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 20px;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      ${rgba("#ff6b6b", 0.4)},
+      ${rgba("#feca57", 0.4)},
+      ${rgba("#48dbfb", 0.4)},
+      ${rgba("#ff9ff3", 0.4)},
+      ${rgba("#54a0ff", 0.4)},
+      ${rgba("#5f27cd", 0.4)},
+      ${rgba("#ff6b6b", 0.4)}
+    );
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation:
+      ${rotateGradient} 3s linear infinite,
+      ${pulseGlow} 2s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &:hover::before,
+  &:focus-within::before {
+    opacity: 1;
+  }
+
+  &:hover::after,
+  &:focus-within::after {
+    opacity: 1;
+  }
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      &::before {
+        opacity: 1;
+      }
+      &::after {
+        opacity: 1;
+      }
+    `}
+`;
+
+const StyledSparkleContainer = styled.div<{ $isActive: boolean }>`
+  position: absolute;
+  inset: -30px;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 30px;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      opacity: 1;
+    `}
+`;
+
+const StyledSparkle = styled.div<{
+  $color: string;
+  $left: number;
+  $top: number;
+  $delay: number;
+}>`
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: ${({ $color }) => $color};
+  box-shadow: 0 0 6px ${({ $color }) => $color};
+  left: ${({ $left }) => $left}%;
+  top: ${({ $top }) => $top}%;
+  animation: ${sparkleFloat} 2s ease-in-out infinite;
+  animation-delay: ${({ $delay }) => $delay}s;
+`;
+
+const StyledRainbowInput = styled.input<{ theme: Theme }>`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: ${({ theme }) => theme.colors.light};
+  border: 1px solid ${({ theme }) => theme.colors.grayLight};
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: ${({ theme }) => theme.fontSizes.text.xs};
+  font-family: inherit;
+  color: ${({ theme }) => theme.colors.dark};
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  ${mq("lg")} {
+    font-size: ${({ theme }) => theme.fontSizes.small.lg};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => rgba(theme.colors.dark, 0.4)};
+    transition: color 0.3s ease;
+  }
+
+  &:focus::placeholder {
+    color: ${({ theme }) => rgba(theme.colors.dark, 0.6)};
+  }
+
+  &:focus {
+    border-color: transparent;
+  }
+`;
+
+const StyledRainbowButton = styled(Button)<{
+  theme: Theme;
+  $hasContent: boolean;
+}>`
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  color: ${({ theme }) =>
+    theme.isDark ? theme.colors.dark : theme.colors.light};
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      #ff6b6b,
+      #feca57,
+      #48dbfb,
+      #ff9ff3,
+      #54a0ff
+    );
+    background-size: 300% 300%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+    animation: ${shimmer} 3s linear infinite;
+    width: 200%;
+  }
+
+  ${({ $hasContent }) =>
+    $hasContent &&
+    css`
+      &::before {
+        opacity: 1;
+      }
+    `}
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  & svg {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+    transform: none;
+    box-shadow: none;
+
+    &::before {
+      opacity: 0;
+    }
+  }
+`;
+
 const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
   display: flex;
   gap: 10px;
   justify-content: center;
+  align-items: center;
   background: ${({ theme }) => theme.colors.light};
   padding: 20px;
   position: fixed;
@@ -91,20 +352,8 @@ const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
       transform: translateX(0);
     `}
 
-  & input {
-    width: 100%;
-  }
-
   & .loading {
     animation: ${loadingAnimation} 1s linear infinite;
-  }
-
-  & button {
-    &:disabled,
-    &:disabled:hover {
-      background: ${({ theme }) => theme.colors.primaryDark};
-      color: ${({ theme }) => theme.colors.light};
-    }
   }
 `;
 
@@ -140,14 +389,6 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
   & .loading {
     animation: ${loadingAnimation} 1s linear infinite;
   }
-
-  & button {
-    &:disabled,
-    &:disabled:hover {
-      background: ${({ theme }) => theme.colors.primaryDark};
-      color: ${({ theme }) => theme.colors.light};
-    }
-  }
 `;
 
 const StyledChatFixedInner = styled.div`
@@ -156,6 +397,7 @@ const StyledChatFixedInner = styled.div`
   display: flex;
   gap: 10px;
   justify-content: center;
+  align-items: center;
 `;
 
 const StyledError = styled.div<{ theme: Theme }>`
@@ -321,6 +563,85 @@ type ApiResponse = {
   error?: string;
 };
 
+const SPARKLE_COLORS = [
+  "#ff6b6b",
+  "#feca57",
+  "#48dbfb",
+  "#ff9ff3",
+  "#54a0ff",
+  "#5f27cd",
+];
+
+// Deterministic sparkle positions to avoid hydration mismatch
+const SPARKLE_POSITIONS = [
+  { left: 8, top: 35 },
+  { left: 17, top: 55 },
+  { left: 26, top: 28 },
+  { left: 35, top: 68 },
+  { left: 44, top: 42 },
+  { left: 53, top: 75 },
+  { left: 62, top: 32 },
+  { left: 71, top: 58 },
+  { left: 80, top: 45 },
+  { left: 89, top: 65 },
+];
+
+interface RainbowInputProps {
+  id?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  autoComplete?: string;
+}
+
+function RainbowInput({
+  id,
+  value,
+  onChange,
+  placeholder,
+  autoComplete,
+}: RainbowInputProps) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const isActive = isFocused || isHovered;
+
+  const sparkles = SPARKLE_POSITIONS.map((pos, i) => ({
+    color: SPARKLE_COLORS[i % SPARKLE_COLORS.length],
+    left: pos.left,
+    top: pos.top,
+    delay: i * 0.12,
+  }));
+
+  return (
+    <StyledRainbowInputWrapper
+      $isActive={isActive}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <StyledSparkleContainer $isActive={isActive}>
+        {sparkles.map((sparkle, i) => (
+          <StyledSparkle
+            key={i}
+            $color={sparkle.color}
+            $left={sparkle.left}
+            $top={sparkle.top}
+            $delay={sparkle.delay}
+          />
+        ))}
+      </StyledSparkleContainer>
+      <StyledRainbowInput
+        id={id}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
+    </StyledRainbowInputWrapper>
+  );
+}
+
 function Chat() {
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
@@ -417,17 +738,19 @@ function Chat() {
     <>
       <StyledChatFixedForm onSubmit={ask} $hide={answer?.length > 0}>
         <StyledChatFixedInner>
-          <Input
+          <RainbowInput
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask AI Assistant..."
-            className="chat-input"
-            $fullWidth
             autoComplete="off"
           />
-          <Button type="submit" disabled={loading}>
+          <StyledRainbowButton
+            type="submit"
+            disabled={loading}
+            $hasContent={question.trim().length > 0}
+          >
             {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
-          </Button>
+          </StyledRainbowButton>
         </StyledChatFixedInner>
       </StyledChatFixedForm>
 
@@ -469,17 +792,20 @@ function Chat() {
       </StyledChat>
 
       <StyledChatForm onSubmit={ask} $isVisible={isOpen}>
-        <Input
+        <RainbowInput
           id="chat-bottom-input"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask AI Assistant..."
-          $fullWidth
           autoComplete="off"
         />
-        <Button type="submit" disabled={loading || question.trim() === ""}>
+        <StyledRainbowButton
+          type="submit"
+          disabled={loading || question.trim() === ""}
+          $hasContent={question.trim().length > 0}
+        >
           {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
-        </Button>
+        </StyledRainbowButton>
       </StyledChatForm>
     </>
   );
