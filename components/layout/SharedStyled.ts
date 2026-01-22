@@ -786,10 +786,6 @@ export const stylesLists = css<{ theme: Theme }>`
       ${({ theme }) => styledText(theme)};
       min-height: 23px;
 
-      & .code-wrapper {
-        margin: 10px 0;
-      }
-
       $mq: "lg" {
         min-height: 27px;
       }

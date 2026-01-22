@@ -129,7 +129,7 @@ This is the next line.
 - Use *italics* for emphasis or technical terms
 - Limit formatting combinations to maintain readability
 
-## Links
+## Links usage
 - Avoid vague text like “click here”
 - Prefer root-relative paths for internal links
 - Regularly validate links to ensure they are not broken`;
@@ -137,11 +137,11 @@ This is the next line.
 export const metadata: Metadata = {
   title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Learn how to structure and style your content with headers, formatting, and links.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Learn how to structure and style your content with headers, formatting, and links.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

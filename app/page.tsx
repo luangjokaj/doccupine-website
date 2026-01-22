@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
 import config from "@/config.json";
 
-const indexContent = `# Welcome to Doccupine
+const content = `# Welcome to Doccupine
 Using Doccupine, you simply create your documentation in MDX files with traditional Markdown syntax, Doccupine monitors your changes automatically generating a beautiful, modern documentation website.
 
 ## Getting Started
@@ -23,7 +23,7 @@ After selecting the directory, Doccupine will ask you to enter the name of the d
 This will start the development server on port 3000. Open your browser and navigate to http://localhost:3000 to view your documentation.
 
 ## Start documenting
-Start documenting your project by editing the **index.mdx** file in the choosen MDX directory, this is the home page of your documentation website.
+Start documenting your project by editing the **index.mdx** file in the choosen MDX directory, this is the content for the home page of your documentation website.
 
 In your MDX directory, you can structure your content using folders and files. Doccupine will automatically generate a navigation menu based on the configured categories and order.
 `;
@@ -40,5 +40,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <Docs content={indexContent} />;
+  return <Docs content={content} />;
 }
