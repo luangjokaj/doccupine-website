@@ -109,15 +109,12 @@ const StyledChatForm = styled.form<{ theme: Theme; $isVisible: boolean }>`
 `;
 
 const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  z-index: 1000;
   transition: all 0.3s ease;
+  position: fixed;
   bottom: 20px;
   left: 20px;
-  position: fixed;
   width: calc(100% - 115px);
+  z-index: 1000;
 
   ${mq("lg")} {
     left: 50%;
@@ -151,6 +148,14 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
       color: ${({ theme }) => theme.colors.light};
     }
   }
+`;
+
+const StyledChatFixedInner = styled.div`
+  max-width: 640px;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 `;
 
 const StyledError = styled.div<{ theme: Theme }>`
@@ -410,17 +415,19 @@ function Chat() {
   return (
     <>
       <StyledChatFixedForm onSubmit={ask} $hide={answer?.length > 0}>
-        <Input
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Ask AI Assistant..."
-          className="chat-input"
-          $fullWidth
-          autoComplete="off"
-        />
-        <Button type="submit" disabled={loading}>
-          {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
-        </Button>
+        <StyledChatFixedInner>
+          <Input
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask AI Assistant..."
+            className="chat-input"
+            $fullWidth
+            autoComplete="off"
+          />
+          <Button type="submit" disabled={loading}>
+            {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
+          </Button>
+        </StyledChatFixedInner>
       </StyledChatFixedForm>
 
       <StyledChat $isVisible={isOpen}>
