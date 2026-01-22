@@ -12,7 +12,7 @@ interface ActionBarProps {
   content: string;
 }
 
-const StyledActionBar = styled.div<{ theme: Theme }>`
+const StyledActionBar = styled.div<{ theme: Theme; $isChatOpen?: boolean }>`
   position: absolute;
   border-bottom: solid 1px ${({ theme }) => theme.colors.grayLight};
   left: 0;
@@ -20,6 +20,7 @@ const StyledActionBar = styled.div<{ theme: Theme }>`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  transition: all 0.3s ease;
 
   ${mq("lg")} {
     left: 50%;
@@ -28,6 +29,12 @@ const StyledActionBar = styled.div<{ theme: Theme }>`
     width: 100%;
     padding: 0 20px 20px 20px;
     margin: 0;
+
+    ${({ $isChatOpen }) =>
+      $isChatOpen &&
+      css`
+        padding: 0 120px 20px 20px;
+      `}
   }
 `;
 
@@ -165,8 +172,22 @@ const StyledContent = styled.div<{
     height: 100%;
     min-height: calc(100vh - 180px);
 
+    ${({ $isChatOpen, $isChatActive }) =>
+      !$isChatOpen &&
+      $isChatActive &&
+      css`
+        min-height: calc(100vh - 250px);
+      `}
+
     ${mq("lg")} {
       min-height: calc(100vh - 110px);
+
+      ${({ $isChatOpen, $isChatActive }) =>
+        !$isChatOpen &&
+        $isChatActive &&
+        css`
+          min-height: calc(100vh - 180px);
+        `}
     }
   }
 `;
@@ -188,7 +209,7 @@ function ActionBar({ children, content }: ActionBarProps) {
 
   return (
     <>
-      <StyledActionBar>
+      <StyledActionBar $isChatOpen={isOpen}>
         <StyledCopyButton onClick={handleCopyContent} $copied={copied}>
           {copied ? (
             <>
