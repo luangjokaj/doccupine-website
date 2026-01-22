@@ -100,7 +100,7 @@ export const StyledSidebar = styled.nav<Props>`
   z-index: 99;
   top: 70px;
   height: 100%;
-  padding: 20px;
+  padding: 20px 20px 80px 20px;
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;

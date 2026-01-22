@@ -392,12 +392,15 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
 `;
 
 const StyledChatFixedInner = styled.div`
-  max-width: 640px;
   margin: auto;
   display: flex;
   gap: 10px;
   justify-content: center;
   align-items: center;
+
+  ${mq("lg")} {
+    max-width: 640px;
+  }
 `;
 
 const StyledError = styled.div<{ theme: Theme }>`
