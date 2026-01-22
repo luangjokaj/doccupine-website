@@ -136,7 +136,7 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
 
       ${mq("lg")} {
         opacity: 0;
-        transform: translateX(-50%) translateY(-100px);
+        transform: translateX(-50%) translateY(-20px);
       }
     `}
 

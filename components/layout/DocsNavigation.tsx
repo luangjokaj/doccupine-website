@@ -1,16 +1,27 @@
 "use client";
+import { useContext } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "@/components/layout/Icon";
 import { mq, Theme } from "@/app/theme";
 import { interactiveStyles } from "@/components/layout/SharedStyled";
+import { ChatContext } from "@/components/Chat";
 
-const StyledNavigationWrapper = styled.div`
+const StyledNavigationWrapper = styled.div<{
+  $isChatOpen?: boolean;
+}>`
+  transition: all 0.3s ease;
   padding: 0 20px 100px 20px;
 
   ${mq("lg")} {
     padding: 0 340px 80px 340px;
+
+    ${({ $isChatOpen }) =>
+      $isChatOpen &&
+      css`
+        padding: 0 440px 80px 340px;
+      `}
   }
 `;
 
@@ -95,6 +106,7 @@ interface DocsNavigationProps {
 }
 
 function DocsNavigation({ result }: DocsNavigationProps) {
+  const { isOpen } = useContext(ChatContext);
   const pathname = usePathname();
 
   const allPages: Page[] = result.flatMap((item) => {
@@ -127,7 +139,7 @@ function DocsNavigation({ result }: DocsNavigationProps) {
   }
 
   return (
-    <StyledNavigationWrapper>
+    <StyledNavigationWrapper $isChatOpen={isOpen}>
       <StyledNavigationInner>
         {prevPage ? (
           <StyledNavButton href={`/${prevPage.slug}`} data-direction="prev">
@@ -154,3 +166,4 @@ function DocsNavigation({ result }: DocsNavigationProps) {
 }
 
 export { DocsNavigation };
+

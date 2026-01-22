@@ -144,6 +144,7 @@ const StyledContent = styled.div<{
   $isChatOpen?: boolean;
 }>`
   padding-top: 140px;
+  transition: all 0.3s ease;
 
   ${mq("lg")} {
     ${({ $isChatActive }) =>
