@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { Icon } from "@/components/layout/Icon";
 import { mq, Theme } from "@/app/theme";
 import { rgba } from "polished";
 import { resetButton, Textarea } from "cherry-styled-components/src/lib";
+import { ChatContext } from "@/components/Chat";
 
 interface ActionBarProps {
   children: React.ReactNode;
@@ -137,11 +138,23 @@ const StyledToggle = styled.button<{ theme: Theme; $isActive?: boolean }>`
   }
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled.div<{
+  theme: Theme;
+  $isChatActive?: boolean;
+  $isChatOpen?: boolean;
+}>`
   padding-top: 140px;
 
   ${mq("lg")} {
-    padding-top: 70px;
+    ${({ $isChatActive }) =>
+      $isChatActive ? `padding-top: 140px;` : `padding-top: 70px;`}
+
+    ${({ $isChatOpen, $isChatActive }) =>
+      $isChatOpen &&
+      $isChatActive &&
+      css`
+        padding-top: 70px;
+      `}
   }
 
   & textarea {
@@ -160,6 +173,7 @@ const StyledContent = styled.div`
 function ActionBar({ children, content }: ActionBarProps) {
   const [isView, setIsView] = useState(true);
   const [copied, setCopied] = useState(false);
+  const { isOpen, isChatActive } = useContext(ChatContext);
 
   const handleCopyContent = async () => {
     try {
@@ -199,9 +213,13 @@ function ActionBar({ children, content }: ActionBarProps) {
           </StyledToggle>
         </StyledActionBarContent>
       </StyledActionBar>
-      {isView && <StyledContent>{children}</StyledContent>}
+      {isView && (
+        <StyledContent $isChatActive={isChatActive} $isChatOpen={isOpen}>
+          {children}
+        </StyledContent>
+      )}
       {!isView && (
-        <StyledContent>
+        <StyledContent $isChatActive={isChatActive} $isChatOpen={isOpen}>
           <Textarea defaultValue={content} $fullWidth />
         </StyledContent>
       )}
@@ -210,4 +228,3 @@ function ActionBar({ children, content }: ActionBarProps) {
 }
 
 export { ActionBar };
-

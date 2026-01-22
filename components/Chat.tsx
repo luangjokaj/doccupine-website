@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { rgba } from "polished";
-import { Button, Input, styledText } from "cherry-styled-components/src/lib";
+import { Button, Input } from "cherry-styled-components/src/lib";
 import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -17,6 +17,16 @@ import { serialize } from "next-mdx-remote/serialize";
 import { mq, Theme } from "@/app/theme";
 import { useMDXComponents } from "@/components/MDXComponents";
 import { styledTable, stylesLists } from "@/components/layout/SharedStyled";
+
+const styledText = css<{ theme: Theme }>`
+  font-size: ${({ theme }) => theme.fontSizes.text.xs};
+  line-height: ${({ theme }) => theme.lineHeights.text.xs};
+
+  ${mq("lg")} {
+    font-size: ${({ theme }) => theme.fontSizes.small.lg};
+    line-height: ${({ theme }) => theme.lineHeights.small.lg};
+  }
+`;
 
 const StyledChat = styled.div<{ theme: Theme; $isVisible: boolean }>`
   margin: 0;
@@ -111,11 +121,12 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
 
   ${mq("lg")} {
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(0);
     bottom: initial;
     position: absolute;
-    top: 11px;
-    width: auto;
+    top: 90px;
+    width: calc(100% - 320px * 2 - 40px);
+    opacity: 1;
   }
 
   ${({ $hide }) =>
@@ -124,6 +135,7 @@ const StyledChatFixedForm = styled.form<{ theme: Theme; $hide: boolean }>`
       transform: translateX(-100px);
 
       ${mq("lg")} {
+        opacity: 0;
         transform: translateX(-50%) translateY(-100px);
       }
     `}
@@ -152,57 +164,66 @@ const StyledError = styled.div<{ theme: Theme }>`
   width: 100%;
 `;
 
-const StyledLoading = styled.div<{ theme: Theme }>`
-  overflow-x: auto;
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) =>
-    theme.isDark ? theme.colors.dark : theme.colors.light};
-  padding: 16px;
-  border-radius: 8px;
-  margin: 20px 0;
-  width: 100%;
-  ${({ theme }) => styledText(theme)};
-  animation: ${({ theme }) => keyframes`
+const loadingDotAnimation = keyframes`
     0% {
-      box-shadow: 0 0 0 0px ${theme.colors.primaryLight};
-      transform: scale(1);
+      opacity: 0;
     }
     50% {
-      box-shadow: 0 0 0 5px ${theme.colors.primaryLight};
-      scale: 0.95;
+      opacity: 1;
     }
     100% {
-      box-shadow: 0 0 0 0px ${theme.colors.primaryLight};
-      transform: scale(1);
+      opacity: 0;
     }
-  `}
-    1s ease infinite;
+`;
+
+const StyledLoading = styled.div<{ theme: Theme }>`
+  overflow-x: auto;
+  margin: 20px 0;
+  width: 100%;
+  font-weight: 600;
+  ${styledText};
+
+  & span {
+    &:nth-child(1) {
+      animation: ${loadingDotAnimation} 1s ease infinite;
+    }
+    &:nth-child(2) {
+      animation: ${loadingDotAnimation} 1s ease infinite;
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation: ${loadingDotAnimation} 1s ease infinite;
+      animation-delay: 0.4s;
+    }
+  }
 `;
 
 const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   overflow-x: auto;
-  background: ${({ theme }) => theme.colors.grayLight};
-  color: ${({ theme }) => theme.colors.dark};
-  padding: 16px;
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) =>
+    theme.isDark ? theme.colors.dark : theme.colors.light};
+  padding: 10px;
   border-radius: 8px;
   margin: 20px 0;
   width: 100%;
-  white-space: pre-wrap;
+  ${styledText};
 
   & p {
-    ${({ theme }) => styledText(theme)};
+    ${styledText};
   }
 
   ${({ $isAnswer }) =>
     $isAnswer &&
     css`
-      background: ${({ theme }) => theme.colors.primary};
+      background: transparent;
+      color: ${({ theme }) => theme.colors.dark};
+      padding: 0;
     `}
 
   & code:not([class]) {
-    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.5)};
-    color: ${({ theme }) =>
-      theme.isDark ? theme.colors.dark : theme.colors.light};
+    background: ${({ theme }) => rgba(theme.colors.primaryLight, 0.2)};
+    color: ${({ theme }) => theme.colors.dark};
     padding: 2px 4px;
     border-radius: ${({ theme }) => theme.spacing.radius.xs};
   }
@@ -210,43 +231,20 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   ${stylesLists};
   ${styledTable};
 
-  & table {
-    & th,
-    & td {
-      color: ${({ theme }) =>
-        theme.isDark ? theme.colors.dark : theme.colors.light};
-      border-bottom: solid 1px
-        ${({ theme }) =>
-          rgba(theme.isDark ? theme.colors.dark : theme.colors.light, 0.2)};
-    }
+  & pre,
+  & .hljs {
+    margin: 10px 0;
+  }
 
-    & td {
-      color: ${({ theme }) =>
-        rgba(theme.isDark ? theme.colors.dark : theme.colors.light, 0.8)};
-    }
+  & .code-wrapper pre {
+    margin: 0;
+    ${styledText};
   }
 
   & ul,
   & ol {
-    margin: -20px 0;
-
     & li {
-      margin: -10px 0;
-      color: ${({ theme }) =>
-        theme.isDark ? theme.colors.dark : theme.colors.light};
-
-      & p {
-        color: ${({ theme }) =>
-          theme.isDark ? theme.colors.dark : theme.colors.light};
-      }
-    }
-  }
-
-  & ul {
-    & li {
-      &::before {
-        background: ${({ theme }) => theme.colors.primaryLight};
-      }
+      ${styledText};
     }
   }
 
@@ -254,19 +252,10 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
     & li {
       padding-left: 20px;
 
-      & p {
-        margin: -20px 0;
-      }
-
-      & .hljs {
-        margin: 0 0 -20px;
-      }
-
       &::before {
         position: absolute;
-        top: 7px;
+        top: 1px;
         left: 0;
-        color: ${({ theme }) => theme.colors.primaryLight};
       }
     }
   }
@@ -277,13 +266,8 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   & h4,
   & h5,
   & h6 {
-    margin: 0;
+    margin: 10px 0;
     padding: 0;
-  }
-
-  & > * {
-    color: ${({ theme }) =>
-      theme.isDark ? theme.colors.dark : theme.colors.light};
   }
 `;
 
@@ -459,7 +443,13 @@ function Chat() {
               )}
             </StyledAnswer>
           ))}
-        {loading && <StyledLoading>Answering...</StyledLoading>}
+        {loading && (
+          <StyledLoading>
+            Answering<span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </StyledLoading>
+        )}
         {error && (
           <StyledError>
             <strong>Error:</strong> {error}
@@ -487,16 +477,19 @@ function Chat() {
 const ChatContext = createContext<{
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isChatActive: boolean;
 }>({
   isOpen: false,
   setIsOpen: () => {},
+  isChatActive: false,
 });
 
 interface ChatContextProviderProps {
   children: React.ReactNode;
+  isChatActive: boolean;
 }
 
-const ChtProvider = ({ children }: ChatContextProviderProps) => {
+const ChtProvider = ({ children, isChatActive }: ChatContextProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -504,6 +497,7 @@ const ChtProvider = ({ children }: ChatContextProviderProps) => {
       value={{
         isOpen,
         setIsOpen,
+        isChatActive,
       }}
     >
       {children}

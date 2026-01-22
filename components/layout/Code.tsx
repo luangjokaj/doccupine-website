@@ -409,6 +409,7 @@ function Code({ code, language = "javascript", theme, className }: CodeProps) {
       <Body
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
         theme={theme}
+        className="code-wrapper"
       />
     </CodeWrapper>
   );

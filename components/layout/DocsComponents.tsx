@@ -38,7 +38,7 @@ const StyledDocsContainer = styled.div<{ theme: Theme; $isChatOpen?: boolean }>`
     ${({ $isChatOpen }) =>
       $isChatOpen &&
       css`
-        padding: 20px 420px 80px 340px;
+        padding: 20px 440px 80px 340px;
       `}
   }
 
