@@ -28,11 +28,13 @@ function generateId(text: string): string {
 }
 
 function extractHeadings(content: string): Heading[] {
+  const contentWithoutCodeBlocks = content.replace(/```[\s\S]*?```/g, "");
+
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: Heading[] = [];
   let match;
 
-  while ((match = headingRegex.exec(content)) !== null) {
+  while ((match = headingRegex.exec(contentWithoutCodeBlocks)) !== null) {
     const level = match[1].length;
     const text = match[2].trim();
     const id = generateId(text);
