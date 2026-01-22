@@ -182,6 +182,7 @@ const StyledLoading = styled.div<{ theme: Theme }>`
   width: 100%;
   font-weight: 600;
   ${styledText};
+  color: ${({ theme }) => theme.colors.dark};
 
   & span {
     &:nth-child(1) {
@@ -415,6 +416,7 @@ function Chat() {
           placeholder="Ask AI Assistant..."
           className="chat-input"
           $fullWidth
+          autoComplete="off"
         />
         <Button type="submit" disabled={loading}>
           {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
@@ -465,6 +467,7 @@ function Chat() {
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask AI Assistant..."
           $fullWidth
+          autoComplete="off"
         />
         <Button type="submit" disabled={loading || question.trim() === ""}>
           {loading ? <LoaderPinwheel className="loading" /> : <ArrowUp />}
