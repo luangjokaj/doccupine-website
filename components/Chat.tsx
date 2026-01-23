@@ -461,10 +461,6 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   width: 100%;
   ${styledText};
 
-  & *:first-child {
-    margin-top: 0;
-  }
-
   & p {
     ${styledText};
   }
@@ -497,6 +493,18 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
     ${styledText};
   }
 
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+
+    & > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   & ul,
   & ol {
     & li {
@@ -514,6 +522,15 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
         left: 0;
       }
     }
+  }
+
+  & img,
+  & video,
+  & iframe {
+    max-width: 100%;
+    border-radius: ${({ theme }) => theme.spacing.radius.lg};
+    margin: 10px 0;
+    display: block;
   }
 
   & h1,
