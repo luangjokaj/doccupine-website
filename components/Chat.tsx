@@ -461,6 +461,10 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   width: 100%;
   ${styledText};
 
+  & *:first-child {
+    margin-top: 0;
+  }
+
   & p {
     ${styledText};
   }
