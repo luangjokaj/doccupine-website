@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
+import {
+  getLLMConfig,
+  createChatModel,
+  createEmbeddings,
+} from "@/services/llm";
 
 type Chunk = {
   id: string;
@@ -128,7 +132,8 @@ async function buildIndex() {
       return;
     }
 
-    const embeddings = new OpenAIEmbeddings({});
+    const config = getLLMConfig();
+    const embeddings = createEmbeddings(config);
     const vectors = await embeddings.embedDocuments(docs.map((d) => d.chunk));
 
     indexCache.chunks = docs.map((d, i) => ({
@@ -156,16 +161,20 @@ async function ensureIndex(force = false) {
 export async function POST(req: Request) {
   try {
     const { question, refresh } = await req.json();
-    if (!process.env.OPENAI_API_KEY) {
+
+    let config;
+    try {
+      config = getLLMConfig();
+    } catch (error: any) {
       return NextResponse.json(
-        { error: "Missing OPENAI_API_KEY in environment" },
+        { error: error?.message || "LLM configuration error" },
         { status: 500 },
       );
     }
 
     await ensureIndex(Boolean(refresh));
 
-    const embedder = new OpenAIEmbeddings({});
+    const embedder = createEmbeddings(config);
     const qVec = await embedder.embedQuery(String(question || ""));
 
     const scored = indexCache.chunks
@@ -180,7 +189,7 @@ export async function POST(req: Request) {
       )
       .join("\n\n================\n\n");
 
-    const llm = new ChatOpenAI({ model: "gpt-4o-mini", temperature: 0 });
+    const llm = createChatModel(config);
     const prompt = [
       {
         role: "system",

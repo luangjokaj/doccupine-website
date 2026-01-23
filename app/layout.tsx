@@ -278,11 +278,9 @@ export default async function RootLayout({
       <body className={font.className}>
         <StyledComponentsRegistry>
           <CherryThemeProvider theme={theme} themeDark={themeDark}>
-            <ChtProvider
-              isChatActive={process.env.OPENAI_API_KEY ? true : false}
-            >
+            <ChtProvider isChatActive={process.env.LLM_PROVIDER ? true : false}>
               <Header />
-              {process.env.OPENAI_API_KEY && <Chat />}
+              {process.env.LLM_PROVIDER && <Chat />}
               <DocsWrapper>
                 <SideBar result={result.length ? result : defaultResults} />
                 {children}
