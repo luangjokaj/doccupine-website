@@ -16,7 +16,6 @@ export interface TabsProps {
 
 const TabsContainer = styled.div`
   width: 100%;
-  max-width: 600px;
   margin: 0 auto;
 `;
 
@@ -72,7 +71,8 @@ const TabButton = styled.button<{ theme: Theme; $isActive?: boolean }>`
 const TabPanel = styled.div<{ theme: Theme }>`
   background-color: ${({ theme }) => theme.colors.light};
   padding: 20px;
-  border-radius: 0 0 ${({ theme }) => theme.spacing.radius.lg} ${({ theme }) => theme.spacing.radius.lg};
+  border-radius: 0 0 ${({ theme }) => theme.spacing.radius.lg}
+    ${({ theme }) => theme.spacing.radius.lg};
   color: ${({ theme }) => theme.colors.grayDark};
   ${({ theme }) => styledText(theme)}
   border: solid 1px ${({ theme }) => theme.colors.grayLight};
@@ -95,11 +95,11 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
     (child): child is React.ReactElement<TabContentProps> =>
       Boolean(
         React.isValidElement(child) &&
-          child.props &&
-          typeof child.props === "object" &&
-          "title" in child.props &&
-          typeof child.props.title === "string" &&
-          child.props.title.trim() !== "",
+        child.props &&
+        typeof child.props === "object" &&
+        "title" in child.props &&
+        typeof child.props.title === "string" &&
+        child.props.title.trim() !== "",
       ),
   );
 
@@ -118,9 +118,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
         ))}
       </TabsList>
 
-      <TabPanel>
-        {tabs[activeTab]?.props.children}
-      </TabPanel>
+      <TabPanel>{tabs[activeTab]?.props.children}</TabPanel>
     </TabsContainer>
   );
 };
