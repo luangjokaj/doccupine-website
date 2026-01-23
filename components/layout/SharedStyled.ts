@@ -772,6 +772,15 @@ export const StyledImage = styled.img<{ theme: Theme; $maxWidth?: string }>`
 `;
 
 export const stylesLists = css<{ theme: Theme }>`
+  & ul,
+  & ol {
+    & li {
+      & > .code-wrapper {
+        margin: 10px 0;
+      }
+    }
+  }
+
   & ul {
     list-style: none;
     padding: 0;

@@ -505,7 +505,7 @@ const StyledAnswer = styled.div<{ theme: Theme; $isAnswer: boolean }>`
   }
 
   & ol {
-    & li {
+    & > li {
       padding-left: 20px;
 
       &::before {

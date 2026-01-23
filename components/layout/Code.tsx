@@ -385,7 +385,10 @@ function Code({ code, language = "javascript", theme, className }: CodeProps) {
   }, [code]);
 
   return (
-    <CodeWrapper className={className || "code-wrapper"} theme={theme}>
+    <CodeWrapper
+      className={className + `${className && " "}code-wrapper`}
+      theme={theme}
+    >
       <TopBar theme={theme}>
         <DotsContainer>
           <Dot theme={theme} />
@@ -409,7 +412,7 @@ function Code({ code, language = "javascript", theme, className }: CodeProps) {
       <Body
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
         theme={theme}
-        className="code-wrapper"
+        className="code-wrapper-body"
       />
     </CodeWrapper>
   );
