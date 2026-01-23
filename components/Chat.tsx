@@ -686,16 +686,16 @@ function Chat() {
   async function ask(e: React.FormEvent) {
     e.preventDefault();
     if (loading || question.trim() === "") return;
+    const currentQuestion = question;
     setQuestion("");
     setIsOpen(true);
-    e.preventDefault();
     setLoading(true);
     setError(null);
 
     const mergedQuestions =
       answer.length > 0
-        ? [...answer, { text: question, answer: false }]
-        : [{ text: question, answer: false }];
+        ? [...answer, { text: currentQuestion, answer: false }]
+        : [{ text: currentQuestion, answer: false }];
 
     setAnswer(mergedQuestions);
 
@@ -703,49 +703,87 @@ function Chat() {
       const res = await fetch("/api/rag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question: currentQuestion }),
       });
-      const data: ApiResponse = await res.json();
+
       if (!res.ok) {
-        throw new Error(data.error || "Request failed");
-      }
-      let content = "";
-      if (typeof data.answer === "string") content = data.answer;
-      else if (Array.isArray(data.answer))
-        content = data.answer
-          .map((p: any) => (typeof p === "string" ? p : p?.text || ""))
-          .join("\n");
-      else content = JSON.stringify(data.answer ?? "", null, 2);
-
-      let mdxSource: MDXRemoteSerializeResult | null = null;
-      try {
-        mdxSource = await serialize(content, {
-          parseFrontmatter: false,
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeHighlight],
-            format: "md",
-            development: false,
-          },
-        });
-      } catch (mdxError: any) {
-        console.error("MDX serialization error:", mdxError);
-        mdxSource = null;
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Request failed");
       }
 
-      const mergedAnswers =
-        answer.length > 0
-          ? [
-              ...answer,
-              { text: question, answer: false },
-              { text: content, answer: true, mdx: mdxSource || undefined },
-            ]
-          : [
-              { text: question, answer: false },
-              { text: content, answer: true, mdx: mdxSource || undefined },
-            ];
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+      let streamedContent = "";
+      let metadata: any = null;
 
-      setAnswer(mergedAnswers);
+      if (!reader) {
+        throw new Error("Failed to get response reader");
+      }
+
+      // Add a placeholder for the streaming answer
+      const streamingAnswerIndex = mergedQuestions.length;
+      setAnswer([...mergedQuestions, { text: "", answer: true }]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n");
+
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            try {
+              const data = JSON.parse(line.slice(6));
+
+              if (data.type === "metadata") {
+                metadata = data.data;
+              } else if (data.type === "content") {
+                streamedContent += data.data;
+
+                setAnswer((prev) => {
+                  const newAnswers = [...prev];
+                  newAnswers[streamingAnswerIndex] = {
+                    text: streamedContent,
+                    answer: true,
+                  };
+                  return newAnswers;
+                });
+              } else if (data.type === "error") {
+                throw new Error(data.data);
+              } else if (data.type === "done") {
+                // Finalize with MDX serialization
+                let mdxSource: MDXRemoteSerializeResult | null = null;
+                try {
+                  mdxSource = await serialize(streamedContent, {
+                    parseFrontmatter: false,
+                    mdxOptions: {
+                      remarkPlugins: [remarkGfm],
+                      rehypePlugins: [rehypeHighlight],
+                      format: "md",
+                      development: false,
+                    },
+                  });
+                } catch (mdxError: any) {
+                  console.error("MDX serialization error:", mdxError);
+                }
+
+                setAnswer((prev) => {
+                  const newAnswers = [...prev];
+                  newAnswers[streamingAnswerIndex] = {
+                    text: streamedContent,
+                    answer: true,
+                    mdx: mdxSource || undefined,
+                  };
+                  return newAnswers;
+                });
+              }
+            } catch (parseError) {
+              console.error("Failed to parse SSE data:", parseError);
+            }
+          }
+        }
+      }
     } catch (err: any) {
       setError(err.message || "Unknown error");
     } finally {

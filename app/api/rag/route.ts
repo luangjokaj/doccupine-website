@@ -202,16 +202,59 @@ export async function POST(req: Request) {
       },
     ] as const;
 
-    const completion = await llm.invoke(prompt as any);
+    const stream = await llm.stream(prompt as any);
 
-    return NextResponse.json({
-      answer: completion?.content,
+    const metadata = {
       sources: scored.map(({ c, score }) => ({
         id: c.id,
         path: path.relative(PROJECT_ROOT, c.path),
         score,
       })),
       chunkCount: indexCache.chunks.length,
+    };
+
+    const encoder = new TextEncoder();
+    const readableStream = new ReadableStream({
+      async start(controller) {
+        try {
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ type: "metadata", data: metadata })}\n\n`,
+            ),
+          );
+
+          for await (const chunk of stream) {
+            const content = chunk?.content || "";
+            if (content) {
+              controller.enqueue(
+                encoder.encode(
+                  `data: ${JSON.stringify({ type: "content", data: content })}\n\n`,
+                ),
+              );
+            }
+          }
+
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`),
+          );
+          controller.close();
+        } catch (error: any) {
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ type: "error", data: error?.message || "Stream error" })}\n\n`,
+            ),
+          );
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(readableStream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
     });
   } catch (e: any) {
     return NextResponse.json(
