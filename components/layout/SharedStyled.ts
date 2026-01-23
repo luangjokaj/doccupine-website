@@ -823,10 +823,6 @@ export const stylesLists = css<{ theme: Theme }>`
       margin: 0;
       ${({ theme }) => styledText(theme)};
 
-      & .code-wrapper {
-        margin: 10px 0;
-      }
-
       &::before {
         content: counter(item) ".";
         display: inline-block;
