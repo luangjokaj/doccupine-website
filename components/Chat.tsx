@@ -699,7 +699,7 @@ function Chat() {
         content = data.answer
           .map((p: any) => (typeof p === "string" ? p : p?.text || ""))
           .join("\n");
-      else content = String(data.answer ?? "");
+      else content = JSON.stringify(data.answer ?? "", null, 2);
 
       let mdxSource: MDXRemoteSerializeResult | null = null;
       try {
@@ -717,7 +717,7 @@ function Chat() {
         mdxSource = null;
       }
 
-      const mergedAnswes =
+      const mergedAnswers =
         answer.length > 0
           ? [
               ...answer,
@@ -729,7 +729,7 @@ function Chat() {
               { text: content, answer: true, mdx: mdxSource || undefined },
             ];
 
-      setAnswer(mergedAnswes);
+      setAnswer(mergedAnswers);
     } catch (err: any) {
       setError(err.message || "Unknown error");
     } finally {
