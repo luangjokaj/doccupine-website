@@ -9,7 +9,7 @@ import React, {
 import styled, { css, keyframes } from "styled-components";
 import { rgba } from "polished";
 import { Button } from "cherry-styled-components/src/lib";
-import { ArrowUp, LoaderPinwheel, X } from "lucide-react";
+import { ArrowUp, LoaderPinwheel, Sparkles, X } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -537,6 +537,13 @@ const StyledChatTitle = styled.div<{ theme: Theme }>`
   z-index: 1000;
 `;
 
+const StyledChatTitleIconWrapper = styled.span<{ theme: Theme }>`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: ${({ theme }) => theme.colors.dark};
+`;
+
 const StyledChatCloseButton = styled.button<{ theme: Theme }>`
   background: transparent;
   border: none;
@@ -548,6 +555,11 @@ const StyledChatCloseButton = styled.button<{ theme: Theme }>`
   @media (hover: hover) {
     &:hover {
       color: ${({ theme }) => theme.colors.primaryDark};
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 `;
@@ -759,7 +771,10 @@ function Chat() {
 
       <StyledChat $isVisible={isOpen}>
         <StyledChatTitle>
-          <h3>AI Assistant</h3>
+          <StyledChatTitleIconWrapper>
+            <Sparkles />
+            <h3>AI Assistant</h3>
+          </StyledChatTitleIconWrapper>
           <StyledChatCloseButton
             onClick={() => {
               setAnswer([]);
