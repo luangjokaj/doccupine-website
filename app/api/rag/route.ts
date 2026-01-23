@@ -194,7 +194,7 @@ export async function POST(req: Request) {
       {
         role: "system",
         content:
-          "You are a helpful documentation assistant. Answer strictly from the provided context. If the answer is not in the context, say you don't know and suggest where to look.",
+          "You are a helpful documentation assistant. Answer strictly from the provided context. If the answer is not in the context, say you don't know and suggest where to look. Make sure the mdx can be nested properly if you show code components within nested ```",
       },
       {
         role: "user",
