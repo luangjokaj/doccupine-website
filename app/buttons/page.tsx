@@ -1,6 +1,14 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
-import config from "@/config.json";
+import configData from "@/config.json";
+
+interface Config {
+  name?: string;
+  icon?: string;
+  preview?: string;
+}
+
+const config = configData as Config;
 
 const content = `# Buttons
 A flexible action component supporting variants, sizes, icons, and links.

@@ -1,6 +1,14 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
-import config from "@/config.json";
+import configData from "@/config.json";
+
+interface Config {
+  name?: string;
+  icon?: string;
+  preview?: string;
+}
+
+const config = configData as Config;
 
 const content = `# Navigation
 Doccupine builds your sidebar automatically from your MDX pages. By default, it reads the page frontmatter and groups pages into categories in the order you define. For larger docs, you can take full control with a \`navigation.json\` file.
@@ -67,6 +75,7 @@ To centrally define the entire sidebar, create a \`navigation.json\` at your pro
       { "slug": "navigation", "title": "Navigation" },
       { "slug": "theme", "title": "Theme" },
       { "slug": "fonts", "title": "Fonts" },
+      { "slug": "ai-assistant", "title": "AI Assistant" },
       { "slug": "deployment", "title": "Deployment" }
     ]
   }

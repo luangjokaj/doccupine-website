@@ -1,6 +1,14 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
-import config from "@/config.json";
+import configData from "@/config.json";
+
+interface Config {
+  name?: string;
+  icon?: string;
+  preview?: string;
+}
+
+const config = configData as Config;
 
 const content = `# Deployment
 Deploy your Doccupine site as a Next.js application on Vercel. You can connect a Git repository for automatic deployments or use the Vercel CLI for manual control.
@@ -69,8 +77,7 @@ For Next.js, make sure variables needed on the client are prefixed with \`NEXT_P
 ## Tips
 - **Preview first**: Use Preview deployments to validate docs before merging to Production.
 - **Cache and performance**: Leverage ISR or static generation where applicable for faster loads.
-- **Consistent tooling**: Keep a single package manager and lockfile in the repo (npm, pnpm, or yarn).
-`;
+- **Consistent tooling**: Keep a single package manager and lockfile in the repo (npm, pnpm, or yarn).`;
 
 export const metadata: Metadata = {
   title: `Deployment ${config.name ? "- " + config.name : "- Doccupine"}`,

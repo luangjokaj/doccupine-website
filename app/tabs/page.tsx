@@ -1,6 +1,14 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
-import config from "@/config.json";
+import configData from "@/config.json";
+
+interface Config {
+  name?: string;
+  icon?: string;
+  preview?: string;
+}
+
+const config = configData as Config;
 
 const content = `# Tabs
 Use the Tabs component to display different content sections in a switchable panel layout.
