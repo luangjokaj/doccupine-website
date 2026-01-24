@@ -1,6 +1,14 @@
 import { Metadata } from "next";
 import { Docs } from "@/components/Docs";
-import config from "@/config.json";
+import configData from "@/config.json";
+
+interface Config {
+  name?: string;
+  icon?: string;
+  preview?: string;
+}
+
+const config = configData as Config;
 
 const content = `# Welcome to Doccupine
 Using Doccupine, you simply create your documentation in MDX files with traditional Markdown syntax, Doccupine monitors your changes automatically generating a beautiful, modern documentation website.

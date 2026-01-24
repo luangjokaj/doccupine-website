@@ -46,12 +46,10 @@ async function* walk(dir: string): AsyncGenerator<string> {
   }
 }
 
-// Extract one or more "const content = ..." values
 function extractContentBlocks(fileText: string): string[] {
   const results: string[] = [];
 
   // Template literal form: const content = `...`;
-  // Handles escaped backticks within the template (\`)
   const tplRegex = /(?:export\s+)?const\s+content\s*=\s*`((?:\\`|[^`])*)`\s*;/g;
   let m: RegExpExecArray | null;
   while ((m = tplRegex.exec(fileText)) !== null) {

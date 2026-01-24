@@ -29,7 +29,6 @@ function generateId(text: string): string {
 
 function extractHeadings(content: string): Heading[] {
   const contentWithoutCodeBlocks = content.replace(/```[\s\S]*?```/g, "");
-
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: Heading[] = [];
   let match;

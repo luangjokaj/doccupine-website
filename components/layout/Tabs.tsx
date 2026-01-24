@@ -4,21 +4,17 @@ import { styledText } from "cherry-styled-components/src/lib";
 import { rgba } from "polished";
 import React, { useState, ReactNode } from "react";
 import styled, { css } from "styled-components";
-
 export interface TabContentProps {
   title: string;
   children: ReactNode;
 }
-
 export interface TabsProps {
   children: React.ReactElement<TabContentProps>[];
 }
-
 const TabsContainer = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
-
 const TabsList = styled.div<{ theme: Theme }>`
   display: flex;
   overflow: hidden;
@@ -29,7 +25,6 @@ const TabsList = styled.div<{ theme: Theme }>`
   border: solid 1px ${({ theme }) => theme.colors.grayLight};
   overflow-x: auto;
 `;
-
 const TabButton = styled.button<{ theme: Theme; $isActive?: boolean }>`
   flex: 1;
   padding: 12px 20px;
@@ -49,7 +44,6 @@ const TabButton = styled.button<{ theme: Theme; $isActive?: boolean }>`
       border-bottom: 3px solid ${theme.colors.primary};
     `}
   position: relative;
-
   &:hover {
     ${({ theme, $isActive }) =>
       !$isActive &&
@@ -58,16 +52,13 @@ const TabButton = styled.button<{ theme: Theme; $isActive?: boolean }>`
         background-color: ${rgba(theme.colors.primaryLight, 0.1)};
       `}
   }
-
   &:focus {
     outline: none;
   }
-
   &:not(:last-child) {
     border-right: 1px solid ${({ theme }) => theme.colors.grayLight};
   }
 `;
-
 const TabPanel = styled.div<{ theme: Theme }>`
   background-color: ${({ theme }) => theme.colors.light};
   padding: 20px;
@@ -83,14 +74,11 @@ const TabPanel = styled.div<{ theme: Theme }>`
   flex-wrap: wrap;
   flex: 1;
 `;
-
 const TabContent: React.FC<TabContentProps> = ({ children }) => {
   return <>{children}</>;
 };
-
 const Tabs: React.FC<TabsProps> = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
-
   const tabs = React.Children.toArray(children).filter(
     (child): child is React.ReactElement<TabContentProps> =>
       Boolean(
@@ -102,7 +90,6 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
         child.props.title.trim() !== "",
       ),
   );
-
   return (
     <TabsContainer>
       <TabsList>
@@ -117,10 +104,8 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
           </TabButton>
         ))}
       </TabsList>
-
       <TabPanel>{tabs[activeTab]?.props.children}</TabPanel>
     </TabsContainer>
   );
 };
-
 export { Tabs, TabContent };
