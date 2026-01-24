@@ -93,6 +93,10 @@
         "title": "Fonts"
       },
       {
+        "slug": "ai-assistant",
+        "title": "AI Assistant"
+      },
+      {
         "slug": "deployment",
         "title": "Deployment"
       }

@@ -52,6 +52,16 @@ export default async function RootLayout({
     "order": 4
   },
   {
+    "slug": "ai-assistant",
+    "title": "AI Assistant",
+    "description": "Integrate AI capabilities into your Doccupine documentation using OpenAI, Anthropic, or Google Gemini.",
+    "date": "2025-01-24",
+    "category": "Configuration",
+    "path": "ai-assistant.mdx",
+    "categoryOrder": 3,
+    "order": 6
+  },
+  {
     "slug": "buttons",
     "title": "Buttons",
     "description": "A flexible action component supporting variants, sizes, icons, and links.",
