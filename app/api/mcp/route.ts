@@ -14,10 +14,6 @@ interface ToolCallRequest {
   params: Record<string, unknown>;
 }
 
-/**
- * POST /api/mcp - Execute MCP tool calls
- * Body: { tool: string, params: object }
- */
 export async function POST(req: Request) {
   try {
     const { tool, params } = (await req.json()) as ToolCallRequest;
@@ -82,9 +78,6 @@ export async function POST(req: Request) {
   }
 }
 
-/**
- * GET /api/mcp - List available tools and index status
- */
 export async function GET() {
   const status = getIndexStatus();
   return NextResponse.json({

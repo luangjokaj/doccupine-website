@@ -96,20 +96,17 @@ async function* walkDocs(dir: string): AsyncGenerator<string> {
 function extractContentBlocks(fileText: string): string[] {
   const results: string[] = [];
 
-  // Template literal form: const content = `...`;
   const tplRegex = /(?:export\s+)?const\s+content\s*=\s*`((?:\\`|[^`])*)`\s*;/g;
   let m: RegExpExecArray | null;
   while ((m = tplRegex.exec(fileText)) !== null) {
     results.push(m[1]);
   }
 
-  // Single-quoted form: const content = '...';
   const sglRegex = /(?:export\s+)?const\s+content\s*=\s*'([^']*)'\s*;/g;
   while ((m = sglRegex.exec(fileText)) !== null) {
     results.push(m[1]);
   }
 
-  // Double-quoted form: const content = "...";
   const dblRegex = /(?:export\s+)?const\s+content\s*=\s*"([^"]*)"\s*;/g;
   while ((m = dblRegex.exec(fileText)) !== null) {
     results.push(m[1]);
