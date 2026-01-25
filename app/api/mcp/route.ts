@@ -1,90 +1,134 @@
-import { NextResponse } from "next/server";
-import {
-  searchDocs,
-  ensureDocsIndex,
-  getIndexStatus,
-  DOCS_TOOLS,
-  listDocs,
-  getDoc,
-} from "@/services/mcp";
-import type { MCPToolName } from "@/services/mcp";
+import { createMCPServer } from "@/services/mcp/server";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 
-interface ToolCallRequest {
-  tool: MCPToolName;
-  params: Record<string, unknown>;
+// Create a stateless transport for serverless environment
+function createTransport() {
+  return new WebStandardStreamableHTTPServerTransport({
+    sessionIdGenerator: undefined, // Stateless mode for serverless
+    enableJsonResponse: true,
+  });
 }
 
 export async function POST(req: Request) {
+  const transport = createTransport();
+  const server = createMCPServer();
+
   try {
-    const { tool, params } = (await req.json()) as ToolCallRequest;
+    await server.connect(transport);
+    const response = await transport.handleRequest(req);
 
-    if (!tool) {
-      return NextResponse.json(
-        { error: "Missing 'tool' parameter" },
-        { status: 400 },
-      );
-    }
+    // Clean up after response is done
+    response
+      .clone()
+      .body?.pipeTo(
+        new WritableStream({
+          close() {
+            transport.close();
+            server.close();
+          },
+        }),
+      )
+      .catch(() => {
+        // Ignore errors during cleanup
+      });
 
-    switch (tool) {
-      case "search_docs": {
-        const query = String(params?.query || "");
-        const limit = typeof params?.limit === "number" ? params.limit : 6;
-        await ensureDocsIndex();
-        const results = await searchDocs(query, limit);
-        return NextResponse.json({
-          content: results.map(({ chunk, score }) => ({
-            path: chunk.path,
-            uri: chunk.uri,
-            score: score.toFixed(3),
-            text: chunk.text,
-          })),
-        });
-      }
-
-      case "get_doc": {
-        const path = String(params?.path || "");
-        const doc = await getDoc({ path });
-        if (!doc) {
-          return NextResponse.json(
-            { error: "Document not found" },
-            { status: 404 },
-          );
-        }
-        return NextResponse.json({ content: doc });
-      }
-
-      case "list_docs": {
-        const directory =
-          typeof params?.directory === "string" ? params.directory : undefined;
-        const docs = await listDocs({ directory });
-        return NextResponse.json({
-          content: docs.map((d) => ({
-            name: d.name,
-            path: d.path,
-            uri: d.uri,
-          })),
-        });
-      }
-
-      default:
-        return NextResponse.json(
-          { error: `Unknown tool: ${tool}` },
-          { status: 400 },
-        );
-    }
-  } catch (e: unknown) {
-    const message = e instanceof Error ? e.message : "Unknown error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return response;
+  } catch (error) {
+    console.error("MCP request error:", error);
+    return new Response(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        error: {
+          code: -32603,
+          message: "Internal server error",
+        },
+        id: null,
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 }
 
-export async function GET() {
-  const status = getIndexStatus();
-  return NextResponse.json({
-    tools: DOCS_TOOLS,
-    index: {
-      ready: status.ready,
-      chunkCount: status.chunkCount,
-    },
-  });
+export async function GET(req: Request) {
+  const transport = createTransport();
+  const server = createMCPServer();
+
+  try {
+    await server.connect(transport);
+    const response = await transport.handleRequest(req);
+
+    response
+      .clone()
+      .body?.pipeTo(
+        new WritableStream({
+          close() {
+            transport.close();
+            server.close();
+          },
+        }),
+      )
+      .catch(() => {});
+
+    return response;
+  } catch (error) {
+    console.error("MCP GET error:", error);
+    return new Response(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        error: {
+          code: -32000,
+          message: "Method not allowed",
+        },
+        id: null,
+      }),
+      {
+        status: 405,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
 }
+
+export async function DELETE(req: Request) {
+  const transport = createTransport();
+  const server = createMCPServer();
+
+  try {
+    await server.connect(transport);
+    const response = await transport.handleRequest(req);
+
+    response
+      .clone()
+      .body?.pipeTo(
+        new WritableStream({
+          close() {
+            transport.close();
+            server.close();
+          },
+        }),
+      )
+      .catch(() => {});
+
+    return response;
+  } catch (error) {
+    console.error("MCP DELETE error:", error);
+    return new Response(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        error: {
+          code: -32000,
+          message: "Method not allowed",
+        },
+        id: null,
+      }),
+      {
+        status: 405,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
+}
+
