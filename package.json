@@ -37,6 +37,7 @@
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.3.8",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unified": "^11.0.5"
   }
 }
