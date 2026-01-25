@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createMCPServer } from "@/services/mcp/server";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { createMCPServer } from "@/services/mcp/server";
 import {
   searchDocs,
   ensureDocsIndex,
