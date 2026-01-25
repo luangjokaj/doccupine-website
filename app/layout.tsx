@@ -212,6 +212,16 @@ export default async function RootLayout({
     "order": 2
   },
   {
+    "slug": "model-context-protocol",
+    "title": "Model Context Protocol",
+    "description": "Connect your Doccupine documentation to AI tools with an MCP server for enhanced AI-powered documentation search.",
+    "date": "2025-01-24",
+    "category": "Configuration",
+    "path": "model-context-protocol.mdx",
+    "categoryOrder": 3,
+    "order": 7
+  },
+  {
     "slug": "navigation",
     "title": "Navigation",
     "description": "Organize and structure your navigation.",

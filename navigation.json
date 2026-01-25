@@ -97,6 +97,10 @@
         "title": "AI Assistant"
       },
       {
+        "slug": "model-context-protocol",
+        "title": "Model Context Protocol"
+      },
+      {
         "slug": "deployment",
         "title": "Deployment"
       }
