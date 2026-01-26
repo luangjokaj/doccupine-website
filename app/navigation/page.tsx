@@ -103,11 +103,11 @@ To centrally define the entire sidebar, create a \`navigation.json\` at your pro
 export const metadata: Metadata = {
   title: `Navigation ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Organize and structure your navigation.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Navigation ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Organize and structure your navigation.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

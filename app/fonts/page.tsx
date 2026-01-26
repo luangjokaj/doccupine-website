@@ -127,11 +127,11 @@ If you have only one file, you can use:
 export const metadata: Metadata = {
   title: `Fonts ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Customize the documentation typography with a fonts.json file (Google Fonts or local custom fonts).`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Fonts ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Customize the documentation typography with a fonts.json file (Google Fonts or local custom fonts).`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

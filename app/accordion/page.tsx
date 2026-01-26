@@ -52,16 +52,17 @@ You can use the Accordion component directly within your MDX files without any i
 
 <Field value="children" type="node" required>
   The content of the accordion.
-</Field>`;
+</Field>
+`;
 
 export const metadata: Metadata = {
   title: `Accordion ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Interactive panels for toggling visibility of content.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Accordion ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Interactive panels for toggling visibility of content.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

@@ -73,11 +73,11 @@ You can use the Callouts component directly within your MDX files without any im
 export const metadata: Metadata = {
   title: `Callouts ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Make your content stand out by using callouts for extra emphasis.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Callouts ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Make your content stand out by using callouts for extra emphasis.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

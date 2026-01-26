@@ -258,11 +258,11 @@ In the following demos, you can see how the theme can be changed. To override th
 export const metadata: Metadata = {
   title: `Theme ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Customize the documentation UI colors with a theme.json file.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Theme ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Customize the documentation UI colors with a theme.json file.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

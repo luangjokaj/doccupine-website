@@ -65,11 +65,11 @@ You can combine multiple \`Update\` components to build complete changelogs.
 export const metadata: Metadata = {
   title: `Update ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Easily manage and present change history.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Update ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Easily manage and present change history.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

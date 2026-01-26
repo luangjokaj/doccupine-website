@@ -82,11 +82,11 @@ For Next.js, make sure variables needed on the client are prefixed with \`NEXT_P
 export const metadata: Metadata = {
   title: `Deployment ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Deploy your Doccupine Next.js app to Vercel.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Deployment ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Deploy your Doccupine Next.js app to Vercel.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

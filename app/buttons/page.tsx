@@ -122,11 +122,11 @@ Buttons can render as links when you provide an \`href\`.
 export const metadata: Metadata = {
   title: `Buttons ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `A flexible action component supporting variants, sizes, icons, and links.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Buttons ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `A flexible action component supporting variants, sizes, icons, and links.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

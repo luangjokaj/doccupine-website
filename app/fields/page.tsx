@@ -45,11 +45,11 @@ Use the \`<Field>\` component to declare API or SDK parameters, or define the re
 export const metadata: Metadata = {
   title: `Fields ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Configure parameters for your API or SDK documentation.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Fields ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Configure parameters for your API or SDK documentation.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

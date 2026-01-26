@@ -84,11 +84,11 @@ Markdown tables use pipes (\`|\`) to separate columns and hyphens (\`---\`) to d
 export const metadata: Metadata = {
   title: `Lists and tables ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Present structured information using lists or tables.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Lists and tables ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Present structured information using lists or tables.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

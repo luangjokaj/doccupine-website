@@ -60,11 +60,11 @@ This will reset the current configuration for Doccupine.`;
 export const metadata: Metadata = {
   title: `Commands ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `In this page, you can find all the commands available in Doccupine CLI.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Commands ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `In this page, you can find all the commands available in Doccupine CLI.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

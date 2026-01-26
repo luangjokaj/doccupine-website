@@ -62,11 +62,11 @@ You can use the \`Steps\` component to create a step-by-step guide. Each step is
 export const metadata: Metadata = {
   title: `Steps ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Guide readers step-by-step using the Steps component.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Steps ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Guide readers step-by-step using the Steps component.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

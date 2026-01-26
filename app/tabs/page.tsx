@@ -70,16 +70,17 @@ You can use the Tabs component directly within your MDX files without any import
 
 <Field value="children" type="node" required>
   The content of the tabs.
-</Field>`;
+</Field>
+`;
 
 export const metadata: Metadata = {
   title: `Tabs ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Use the Tabs component to display different content sections in a switchable panel layout.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Tabs ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Use the Tabs component to display different content sections in a switchable panel layout.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

@@ -49,11 +49,11 @@ You can use icons directly within text to highlight information or add visual co
 export const metadata: Metadata = {
   title: `Icons ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Integrate visual icons from well-known libraries to enrich your documentation.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Icons ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Integrate visual icons from well-known libraries to enrich your documentation.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

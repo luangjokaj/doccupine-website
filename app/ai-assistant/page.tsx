@@ -113,11 +113,11 @@ Control the randomness of AI responses by setting \`LLM_TEMPERATURE\` to a value
 export const metadata: Metadata = {
   title: `AI Assistant ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Integrate AI capabilities into your Doccupine documentation using OpenAI, Anthropic, or Google Gemini.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `AI Assistant ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Integrate AI capabilities into your Doccupine documentation using OpenAI, Anthropic, or Google Gemini.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

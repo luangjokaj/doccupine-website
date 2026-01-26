@@ -53,11 +53,11 @@ If a key is not specified in a page’s frontmatter, Doccupine falls back to the
 export const metadata: Metadata = {
   title: `Globals ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Configure global settings for your documentation.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Globals ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Configure global settings for your documentation.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

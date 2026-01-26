@@ -47,11 +47,11 @@ You can use the Cards component directly within your MDX files without any impor
 export const metadata: Metadata = {
   title: `Cards ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Cards act as visual containers for your content, giving you flexibility to combine text, icons, images, and links in a clean and organized way.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Cards ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Cards act as visual containers for your content, giving you flexibility to combine text, icons, images, and links in a clean and organized way.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

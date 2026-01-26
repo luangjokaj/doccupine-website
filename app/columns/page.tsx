@@ -53,11 +53,11 @@ You can use the \`Columns\` component to create a grid of cards with a specified
 export const metadata: Metadata = {
   title: `Columns ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Columns are used to organize content in a grid-like structure.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Columns ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Columns are used to organize content in a grid-like structure.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

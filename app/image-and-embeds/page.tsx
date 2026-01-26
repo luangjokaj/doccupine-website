@@ -101,11 +101,11 @@ For demonstration videos that loop or start automatically, add attributes as sho
 export const metadata: Metadata = {
   title: `Images and embeds ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Enrich your documentation with visuals, videos, and interactive embeds.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Images and embeds ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Enrich your documentation with visuals, videos, and interactive embeds.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

@@ -338,11 +338,11 @@ The first search may be slower as it builds the index. Subsequent searches are f
 export const metadata: Metadata = {
   title: `Model Context Protocol ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Connect your Doccupine documentation to AI tools with an MCP server for enhanced AI-powered documentation search.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Model Context Protocol ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Connect your Doccupine documentation to AI tools with an MCP server for enhanced AI-powered documentation search.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

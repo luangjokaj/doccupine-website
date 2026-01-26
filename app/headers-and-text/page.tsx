@@ -145,11 +145,11 @@ This is the next line.
 export const metadata: Metadata = {
   title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Learn how to structure and style your content with headers, formatting, and links.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Headers and Text ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Learn how to structure and style your content with headers, formatting, and links.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 

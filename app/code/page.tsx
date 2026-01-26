@@ -52,11 +52,11 @@ class HelloWorld {
 export const metadata: Metadata = {
   title: `Code ${config.name ? "- " + config.name : "- Doccupine"}`,
   description: `Learn how to display inline code and code blocks in documentation.`,
-  icons: `${config.icon || 'https://doccupine.com/favicon.ico'}`,
+  icons: `${config.icon || "https://doccupine.com/favicon.ico"}`,
   openGraph: {
     title: `Code ${config.name ? "- " + config.name : "- Doccupine"}`,
     description: `Learn how to display inline code and code blocks in documentation.`,
-    images: `${config.preview || 'https://doccupine.com/preview.png'}`,
+    images: `${config.preview || "https://doccupine.com/preview.png"}`,
   },
 };
 
