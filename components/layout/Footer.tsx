@@ -1,4 +1,3 @@
-
 "use client";
 import { useContext } from "react";
 import styled, { css } from "styled-components";
@@ -73,4 +72,5 @@ function Footer() {
     </StyledFooter>
   );
 }
+
 export { Footer };
