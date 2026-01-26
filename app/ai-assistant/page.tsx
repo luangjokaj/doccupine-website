@@ -107,8 +107,7 @@ Override the default embedding model by uncommenting and setting \`LLM_EMBEDDING
 ### Temperature
 Control the randomness of AI responses by setting \`LLM_TEMPERATURE\` to a value between 0 and 1:
 - \`0\` - More deterministic and focused responses (default)
-- \`1\` - More creative and varied responses
-`;
+- \`1\` - More creative and varied responses`;
 
 export const metadata: Metadata = {
   title: `AI Assistant ${config.name ? "- " + config.name : "- Doccupine"}`,

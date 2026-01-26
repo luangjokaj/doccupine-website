@@ -70,8 +70,7 @@ You can use the Tabs component directly within your MDX files without any import
 
 <Field value="children" type="node" required>
   The content of the tabs.
-</Field>
-`;
+</Field>`;
 
 export const metadata: Metadata = {
   title: `Tabs ${config.name ? "- " + config.name : "- Doccupine"}`,

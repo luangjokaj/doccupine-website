@@ -44,7 +44,7 @@ const doccupinePages = [
     category: "Configuration",
     path: "ai-assistant.mdx",
     categoryOrder: 3,
-    order: 6
+    order: 5
   },
   {
     slug: "buttons",
@@ -114,7 +114,7 @@ const doccupinePages = [
     category: "Configuration",
     path: "deployment.mdx",
     categoryOrder: 3,
-    order: 5
+    order: 7
   },
   {
     slug: "fields",
@@ -204,7 +204,7 @@ const doccupinePages = [
     category: "Configuration",
     path: "model-context-protocol.mdx",
     categoryOrder: 3,
-    order: 7
+    order: 6
   },
   {
     slug: "navigation",

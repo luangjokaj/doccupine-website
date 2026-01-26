@@ -332,8 +332,7 @@ The first search may be slower as it builds the index. Subsequent searches are f
 * **Keep content up-to-date**: Restart your server after updating documentation to rebuild the index with fresh content.
 * **Use descriptive queries**: More specific queries yield better semantic search results.
 * **Monitor index status**: Use the GET endpoint to check if your index is ready before performing searches.
-* **Optimize content structure**: Well-structured markdown with clear headings improves search relevance.
-`;
+* **Optimize content structure**: Well-structured markdown with clear headings improves search relevance.`;
 
 export const metadata: Metadata = {
   title: `Model Context Protocol ${config.name ? "- " + config.name : "- Doccupine"}`,
